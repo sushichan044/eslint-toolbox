@@ -7,20 +7,19 @@
   "bin": {
     "eslint-config-info": "bin/eslint-config-info.mjs"
   },
+  "files": ["dist"],
   "scripts": {
     "lint": "eslint --max-warnings 0 --fix .",
     "format": "biome format --write .",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
-    "build": "tsdown",
-    "build:check": "pnpm run build && pnpm pack && attw"
+    "build": "tsdown"
   },
   "dependencies": {
     "@sushichan044/eslint-config-resolver": "workspace:^",
     "gunshi": "^0.27.0-alpha.8"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.18.2",
     "@biomejs/biome": "catalog:biome",
     "@eslint/core": "0.15.1",
     "@types/node": "24.1.0",

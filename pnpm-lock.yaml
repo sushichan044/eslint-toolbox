@@ -79,9 +79,6 @@ importers:
         specifier: ^0.27.0-alpha.8
         version: 0.27.0-alpha.8
     devDependencies:
-      '@arethetypeswrong/cli':
-        specifier: 0.18.2
-        version: 0.18.2
       '@biomejs/biome':
         specifier: catalog:biome
         version: 2.1.2
