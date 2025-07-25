@@ -26,9 +26,13 @@ import { any as findUpAny } from "empathic/find";
 import { resolve as resolveModule } from "mlly";
 import { dirname } from "pathe";
 
-import type { ESLintConfig } from "./index";
-
 import { isNonEmptyString, runInDirectory } from "./utils";
+
+export interface ESLintConfig {
+  configs: FlatConfigItem[];
+  dependencies: string[];
+  payload: Payload;
+}
 
 export const resolveConfigPath = (
   root: string,
@@ -196,11 +200,11 @@ export const readFlatConfig = async (root: string): Promise<ESLintConfig> => {
   };
 };
 
-export interface FlatConfigItem extends Linter.Config {
+interface FlatConfigItem extends Linter.Config {
   index: number;
 }
 
-export interface Payload {
+interface Payload {
   configs: FlatConfigItem[];
   files: null;
   meta: PayloadMeta;

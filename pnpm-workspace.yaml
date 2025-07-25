@@ -2,6 +2,10 @@ packages:
   - packages/**
 
 catalogs:
+  build:
+    publint: 0.3.12
+    tsdown: 0.13.0
+    unplugin-unused: 0.5.1
   test:
     fs-fixture: 2.8.1
     vitest: 3.2.4
@@ -14,3 +18,6 @@ catalogs:
   typescript:
     "@virtual-live-lab/tsconfig": 2.1.21
     typescript: 5.8.3
+
+onlyBuiltDependencies:
+  - esbuild

@@ -1,18 +1,27 @@
 {
   "name": "@sushichan044/eslint-config-resolver",
   "description": "Resolves flat config module. For internal use only.",
-  "private": true,
+  "version": "0.0.0",
   "type": "module",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
   },
   "scripts": {
     "format": "biome format --write .",
-    "test": "vitest --run"
+    "test": "vitest --run",
+    "build": "tsdown",
+    "build:check": "pnpm run build && pnpm pack && attw"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "0.18.2",
     "@biomejs/biome": "catalog:biome",
     "@types/node": "24.1.0",
     "@typescript-eslint/utils": "8.38.0",
@@ -20,14 +29,17 @@
     "@virtual-live-lab/tsconfig": "catalog:typescript",
     "eslint": "catalog:eslint",
     "fs-fixture": "catalog:test",
+    "publint": "catalog:build",
+    "tsdown": "catalog:build",
     "typescript": "catalog:typescript",
     "typescript-eslint": "catalog:eslint",
+    "unplugin-unused": "catalog:build",
     "vitest": "catalog:test"
   },
   "dependencies": {
-    "bundle-require": "5.1.0",
-    "empathic": "2.0.0",
-    "mlly": "1.7.4",
-    "pathe": "2.0.3"
+    "bundle-require": "^5.1.0",
+    "empathic": "^2.0.0",
+    "mlly": "^1.7.4",
+    "pathe": "^2.0.3"
   }
 }
