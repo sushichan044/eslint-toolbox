@@ -1,18 +1,11 @@
 {
-  "name": "@sushichan044/eslint-config-resolver",
-  "description": "Resolves flat config module. For internal use only.",
+  "name": "@sushichan044/eslint-config-info",
+  "description": "A CLI to get information about ESLint configurations.",
   "version": "0.0.0",
   "type": "module",
   "license": "Apache-2.0",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": ["dist"],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
+  "bin": {
+    "eslint-config-info": "bin/eslint-config-info.mjs"
   },
   "scripts": {
     "lint": "eslint --max-warnings 0 --fix .",
@@ -22,26 +15,27 @@
     "build": "tsdown",
     "build:check": "pnpm run build && pnpm pack && attw"
   },
+  "dependencies": {
+    "@sushichan044/eslint-config-resolver": "workspace:^",
+    "gunshi": "^0.27.0-alpha.8"
+  },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.2",
     "@biomejs/biome": "catalog:biome",
+    "@eslint/core": "0.15.1",
     "@types/node": "24.1.0",
-    "@typescript-eslint/utils": "8.38.0",
+    "@typescript-eslint/utils": "^8.27.0",
     "@virtual-live-lab/eslint-config": "catalog:eslint",
     "@virtual-live-lab/tsconfig": "catalog:typescript",
     "eslint": "catalog:eslint",
+    "eslint-plugin-react": "7.37.5",
     "fs-fixture": "catalog:test",
+    "globals": "16.3.0",
     "publint": "catalog:build",
     "tsdown": "catalog:build",
     "typescript": "catalog:typescript",
     "typescript-eslint": "catalog:eslint",
     "unplugin-unused": "catalog:build",
     "vitest": "catalog:test"
-  },
-  "dependencies": {
-    "bundle-require": "^5.1.0",
-    "empathic": "^2.0.0",
-    "mlly": "^1.7.4",
-    "pathe": "^2.0.3"
   }
 }
