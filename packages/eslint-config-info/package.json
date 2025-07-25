@@ -15,13 +15,14 @@
   },
   "dependencies": {
     "@sushichan044/eslint-config-resolver": "workspace:^",
-    "gunshi": "0.27.0-alpha.8"
+    "gunshi": "^0.27.0-alpha.8"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.2",
     "@biomejs/biome": "catalog:biome",
+    "@eslint/core": "0.15.1",
     "@types/node": "24.1.0",
-    "@typescript-eslint/utils": "8.38.0",
+    "@typescript-eslint/utils": "^8.27.0",
     "@virtual-live-lab/eslint-config": "catalog:eslint",
     "@virtual-live-lab/tsconfig": "catalog:typescript",
     "eslint": "catalog:eslint",

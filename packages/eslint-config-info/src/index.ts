@@ -2,6 +2,7 @@ import type { Args } from "gunshi";
 
 import { readFlatConfig } from "@sushichan044/eslint-config-resolver";
 import { cli, define } from "gunshi";
+import { writeFile } from "node:fs/promises";
 import { cwd } from "node:process";
 
 import {
@@ -9,9 +10,16 @@ import {
   name as pkgName,
   version as pkgVersion,
 } from "../package.json";
+import { formatRuleInfo } from "./format";
+import { aggregateRules, searchRuleExact, searchRuleFuzzy } from "./search";
 
 const mainCmd = define({
   args: {
+    exact: {
+      default: false,
+      description: "Search for the exact rule name",
+      type: "boolean",
+    },
     json: {
       default: false,
       description: "Output as JSON",
@@ -25,22 +33,44 @@ const mainCmd = define({
     rule: {
       description:
         "Rule name to search for (e.g., 'no-unused-vars', '@typescript-eslint/no-explicit-any')",
-      required: true,
       type: "positional",
     },
   } as const satisfies Args,
   name: "root",
   run: async (c) => {
-    const { json: printAsJSON, rule: ruleName } = c.values;
+    const { exact: searchExact, json: printAsJSON, rule: ruleName } = c.values;
 
     const rootDir = c.values.root ?? cwd();
-    // const printAsJSON = c.values.json;
     const eslintConfig = await readFlatConfig(rootDir);
 
-    console.dir(eslintConfig, {
-      colors: true,
-      depth: null,
-    });
+    await writeFile(
+      "plugin-rules.json",
+      JSON.stringify(aggregateRules(eslintConfig), null, 2),
+    );
+
+    const searchInput = {
+      config: eslintConfig,
+      ruleName,
+    };
+
+    const searchResult = searchExact
+      ? searchRuleExact(searchInput)
+      : searchRuleFuzzy(searchInput);
+
+    if (printAsJSON) {
+      console.log(JSON.stringify(searchResult.rules, null, 2));
+      return;
+    }
+
+    if (!searchResult.found) {
+      console.log(`No rules found for input "${ruleName}"`);
+      return;
+    }
+
+    for (const { info, name } of searchResult.rules) {
+      const formattedInfo = formatRuleInfo(info);
+      console.log(`### ${name}\n\n${formattedInfo}\n`);
+    }
   },
 });
 
