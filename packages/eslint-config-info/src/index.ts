@@ -2,7 +2,6 @@ import type { Args } from "gunshi";
 
 import { readFlatConfig } from "@sushichan044/eslint-config-resolver";
 import { cli, define } from "gunshi";
-import { writeFile } from "node:fs/promises";
 import { cwd } from "node:process";
 
 import {
@@ -11,7 +10,7 @@ import {
   version as pkgVersion,
 } from "../package.json";
 import { formatRuleInfo } from "./format";
-import { aggregateRules, searchRuleExact, searchRuleFuzzy } from "./search";
+import { searchRuleExact, searchRuleFuzzy } from "./search";
 
 const mainCmd = define({
   args: {
@@ -42,11 +41,6 @@ const mainCmd = define({
 
     const rootDir = c.values.root ?? cwd();
     const eslintConfig = await readFlatConfig(rootDir);
-
-    await writeFile(
-      "plugin-rules.json",
-      JSON.stringify(aggregateRules(eslintConfig), null, 2),
-    );
 
     const searchInput = {
       config: eslintConfig,
