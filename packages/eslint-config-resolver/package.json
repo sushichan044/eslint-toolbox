@@ -1,0 +1,33 @@
+{
+  "name": "@sushichan044/eslint-config-resolver",
+  "description": "Resolves flat config module. For internal use only.",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "format": "biome format --write .",
+    "test": "vitest --run"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "catalog:biome",
+    "@types/node": "24.1.0",
+    "@typescript-eslint/utils": "8.38.0",
+    "@virtual-live-lab/eslint-config": "catalog:eslint",
+    "@virtual-live-lab/tsconfig": "catalog:typescript",
+    "eslint": "catalog:eslint",
+    "fs-fixture": "catalog:test",
+    "typescript": "catalog:typescript",
+    "typescript-eslint": "catalog:eslint",
+    "vitest": "catalog:test"
+  },
+  "dependencies": {
+    "bundle-require": "5.1.0",
+    "empathic": "2.0.0",
+    "mlly": "1.7.4",
+    "pathe": "2.0.3"
+  }
+}
