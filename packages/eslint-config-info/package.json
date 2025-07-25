@@ -8,7 +8,9 @@
     "eslint-config-info": "bin/eslint-config-info.mjs"
   },
   "scripts": {
+    "lint": "eslint --max-warnings 0 --fix .",
     "format": "biome format --write .",
+    "typecheck": "tsc --noEmit",
     "test": "vitest --run",
     "build": "tsdown",
     "build:check": "pnpm run build && pnpm pack && attw"
