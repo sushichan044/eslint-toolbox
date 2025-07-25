@@ -218,7 +218,7 @@ interface PayloadMeta {
   wsPort?: number;
 }
 
-interface RuleInfo
+export interface RuleInfo
   extends RuleMetaData<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     any,
