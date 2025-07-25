@@ -7,7 +7,7 @@
     "lint": "pnpm -r run lint",
     "test": "vitest --run",
     "format": "biome format --write .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "pnpm -r run typecheck"
   },
   "keywords": [],
   "author": "",
