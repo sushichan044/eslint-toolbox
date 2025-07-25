@@ -1,0 +1,16 @@
+packages:
+  - packages/**
+
+catalogs:
+  test:
+    fs-fixture: 2.8.1
+    vitest: 3.2.4
+  biome:
+    "@biomejs/biome": 2.1.2
+  eslint:
+    "@virtual-live-lab/eslint-config": 2.2.24
+    eslint: 9.31.0
+    typescript-eslint: 8.38.0
+  typescript:
+    "@virtual-live-lab/tsconfig": 2.1.21
+    typescript: 5.8.3
