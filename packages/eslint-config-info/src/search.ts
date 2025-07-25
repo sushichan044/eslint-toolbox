@@ -4,6 +4,16 @@ import type { FlattenRules, RuleIdentifierInput, RuleMetaData } from "./types";
 
 interface RuleSearchInput {
   config: ESLintConfig;
+  /**
+   * The rule name to search for.
+   *
+   * @example
+   * ```markdown
+   * - `eslint/no-unused-vars`
+   * - `@typescript-eslint/no-unused-vars`
+   * - `no-unused-vars`
+   * ```
+   */
   ruleName: string;
 }
 
@@ -15,17 +25,81 @@ interface RuleSearchResult {
   }>;
 }
 
+const createNotFoundResult = (): RuleSearchResult => ({
+  found: false,
+  rules: [],
+});
+
+/**
+ * Searches for an ESLint rule with exact name matching.
+ *
+ * @param input - The search input containing config and rule name
+ * @returns Search result with found flag and matching rules array
+ *
+ * @example
+ * ```typescript
+ * const result = searchRuleExact({
+ *   config: eslintConfig,
+ *   ruleName: "no-unused-vars"
+ * });
+ * // Returns exact match for "eslint/no-unused-vars"
+ * ```
+ */
 export const searchRuleExact = (input: RuleSearchInput): RuleSearchResult => {
+  const prepared = prepareRuleSearch(input);
+  if (!prepared) {
+    return createNotFoundResult();
+  }
+
+  return findExactRule(prepared);
+};
+
+/**
+ * Searches for ESLint rules using fuzzy matching (case-insensitive substring search).
+ *
+ * @param input - The search input containing config and rule name
+ * @returns Search result with found flag and array of matching rules
+ *
+ * @example
+ * ```typescript
+ * const result = searchRuleFuzzy({
+ *   config: eslintConfig,
+ *   ruleName: "unused"
+ * });
+ * // Returns rules like "no-unused-vars", "no-unused-labels", etc.
+ * ```
+ */
+export const searchRuleFuzzy = (input: RuleSearchInput): RuleSearchResult => {
+  const prepared = prepareRuleSearch(input);
+  if (!prepared) {
+    return createNotFoundResult();
+  }
+
+  return findFuzzyRules(prepared);
+};
+
+interface PreparedSearch {
+  pluginRules: Record<string, RuleMetaData>;
+  ruleIdentifier: RuleIdentifierInput;
+}
+
+const prepareRuleSearch = (input: RuleSearchInput): PreparedSearch | null => {
   const ruleIdentifier = extractRuleIdentifier(input.ruleName);
   const rules = aggregateRules(input.config);
 
   const pluginRules = rules[ruleIdentifier.plugin];
   if (!pluginRules) {
-    return {
-      found: false,
-      rules: [],
-    };
+    return null;
   }
+
+  return {
+    pluginRules,
+    ruleIdentifier,
+  };
+};
+
+const findExactRule = (prepared: PreparedSearch): RuleSearchResult => {
+  const { pluginRules, ruleIdentifier } = prepared;
 
   const exactRule = pluginRules[ruleIdentifier.name];
   if (exactRule !== undefined) {
@@ -40,25 +114,13 @@ export const searchRuleExact = (input: RuleSearchInput): RuleSearchResult => {
     };
   }
 
-  return {
-    found: false,
-    rules: [],
-  };
+  return createNotFoundResult();
 };
 
-export const searchRuleFuzzy = (input: RuleSearchInput): RuleSearchResult => {
-  const ruleIdentifier = extractRuleIdentifier(input.ruleName);
-  const rules = aggregateRules(input.config);
+const findFuzzyRules = (prepared: PreparedSearch): RuleSearchResult => {
+  const { pluginRules, ruleIdentifier } = prepared;
 
-  const matchedPluginRules = rules[ruleIdentifier.plugin];
-  if (!matchedPluginRules) {
-    return {
-      found: false,
-      rules: [],
-    };
-  }
-
-  const matchedRules = Object.entries(matchedPluginRules)
+  const matchedRules = Object.entries(pluginRules)
     .filter(([ruleKey]) =>
       ruleKey.toLowerCase().includes(ruleIdentifier.name.toLowerCase()),
     )

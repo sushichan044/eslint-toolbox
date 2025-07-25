@@ -1,5 +1,4 @@
 import ts from "@virtual-live-lab/eslint-config/presets/ts";
-
 import { defineConfig } from "eslint/config";
 import globals from "globals";
 
