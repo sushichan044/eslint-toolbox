@@ -7,7 +7,11 @@
     "lint": "pnpm -r run lint",
     "test": "vitest --run",
     "format": "biome format --write .",
-    "typecheck": "pnpm -r run typecheck"
+    "typecheck": "pnpm -r run typecheck",
+    "build": "pnpm run build:config-array-resolver && pnpm run build:rule-explorer",
+    "build:config-array-resolver": "pnpm --filter @sushichan044/eslint-config-array-resolver run build",
+    "build:rule-explorer": "pnpm --filter eslint-rule-explorer run build",
+    "pkg-pr-new": "pkg-pr-new publish --compact --comment=update --pnpm"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +22,7 @@
     "@virtual-live-lab/eslint-config": "catalog:eslint",
     "@virtual-live-lab/tsconfig": "catalog:typescript",
     "eslint": "catalog:eslint",
+    "pkg-pr-new": "0.0.54",
     "typescript": "catalog:typescript",
     "typescript-eslint": "catalog:eslint",
     "vitest": "catalog:test"
