@@ -12,7 +12,8 @@
     "build:config-array-resolver": "pnpm --filter @sushichan044/eslint-config-array-resolver run build",
     "build:rule-explorer": "pnpm --filter eslint-rule-explorer run build",
     "pkg-pr-new": "pkg-pr-new publish --compact --comment=update --pnpm",
-    "release": "pnpm run build && changeset publish"
+    "release": "pnpm run build && changeset publish",
+    "changeset": "changeset"
   },
   "keywords": [],
   "author": "",
