@@ -7,6 +7,8 @@
 
 ## Overview
 
+![command: npx eslint-rule-explorer perfectionist/sort-jsx-props --json | jq -r '.[].info.docs.url'  output: https://perfectionist.dev/rules/sort-jsx-props](docs/images/extract-url.png)
+
 eslint-rule-explorer is a modern CLI tool that helps developers explore, search, and analyze ESLint rules in their projects. It provides comprehensive information about rule configurations, supports both fuzzy and exact search modes, and works seamlessly with ESLint's flat config format.
 
 > [!WARNING]
