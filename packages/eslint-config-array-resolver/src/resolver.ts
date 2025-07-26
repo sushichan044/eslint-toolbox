@@ -68,7 +68,7 @@ interface ReadFlatConfigOptions {
   suppressOutput?: boolean;
 }
 
-export const readFlatConfig = async (
+export const resolveFlatConfig = async (
   root: string,
   options: ReadFlatConfigOptions = {},
 ): Promise<ESLintConfig> => {
