@@ -30,7 +30,7 @@ import {
   executeWithSilentLogs,
   isNonEmptyString,
   runInDirectory,
-} from "./utils";
+} from "./utils.js";
 
 export interface ESLintConfig {
   configs: FlatConfigItem[];
