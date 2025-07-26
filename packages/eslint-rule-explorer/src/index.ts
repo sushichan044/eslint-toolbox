@@ -1,6 +1,6 @@
 import type { Args } from "gunshi";
 
-import { readFlatConfig } from "@sushichan044/eslint-config-array-resolver";
+import { resolveFlatConfig } from "@sushichan044/eslint-config-array-resolver";
 import { cli, define } from "gunshi";
 import { cwd } from "node:process";
 
@@ -40,7 +40,7 @@ const mainCmd = define({
     const { exact: searchExact, json: printAsJSON, rule: ruleName } = c.values;
 
     const rootDir = c.values.root ?? cwd();
-    const eslintConfig = await readFlatConfig(rootDir, {
+    const eslintConfig = await resolveFlatConfig(rootDir, {
       // unnecessary stdout will break JSON pipeline like jq
       suppressOutput: printAsJSON,
     });
