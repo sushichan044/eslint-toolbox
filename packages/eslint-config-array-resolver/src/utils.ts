@@ -33,6 +33,10 @@ export const isNonEmptyString = (
 
 type Awaitable<T> = Promise<T> | T;
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const NO_OP_FN = () => {};
+const NO_RESULT = Symbol("NO_RESULT");
+
 /**
  *  Execute a function with silent logs.
  *
@@ -89,7 +93,3 @@ export const executeWithSilentLogs = async <T>(
 
   return res.data;
 };
-
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const NO_OP_FN = () => {};
-const NO_RESULT = Symbol("NO_RESULT");
