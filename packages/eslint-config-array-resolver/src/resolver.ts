@@ -26,7 +26,11 @@ import { any as findUpAny } from "empathic/find";
 import { resolve as resolveModule } from "mlly";
 import { dirname } from "pathe";
 
-import { isNonEmptyString, runInDirectory } from "./utils.js";
+import {
+  executeWithSilentLogs,
+  isNonEmptyString,
+  runInDirectory,
+} from "./utils";
 
 export interface ESLintConfig {
   configs: FlatConfigItem[];
@@ -59,21 +63,31 @@ export const resolveConfigPath = (
   };
 };
 
-export const readFlatConfig = async (root: string): Promise<ESLintConfig> => {
+interface ReadFlatConfigOptions {
+  suppressOutput?: boolean;
+}
+
+export const readFlatConfig = async (
+  root: string,
+  options: ReadFlatConfigOptions = {},
+): Promise<ESLintConfig> => {
+  const { suppressOutput = false } = options;
   const { basePath, fullPath } = resolveConfigPath(root);
 
-  // In MCP server, the current working directory is usually user's home directory.
-  // But, configs like eslint-config-flat-gitignore are depends on current working directory.
-  // So we must move to the directory of the eslint config file explicitly.
-
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { dependencies, mod } = await runInDirectory(basePath, async () => {
+  const moduleImportPromise = runInDirectory(basePath, async () => {
     return bundleRequire({
       cwd: basePath,
       filepath: fullPath,
       tsconfig: false,
     });
   });
+
+  const importPromise = suppressOutput
+    ? executeWithSilentLogs(async () => moduleImportPromise)
+    : moduleImportPromise;
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { dependencies, mod } = await importPromise;
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   const configModule = (await (mod.default ?? mod)) as
