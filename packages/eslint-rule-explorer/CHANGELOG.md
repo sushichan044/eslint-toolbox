@@ -1,5 +1,15 @@
 # eslint-rule-explorer
 
+## 0.0.3
+### Patch Changes
+
+
+
+- [#12](https://github.com/sushichan044/eslint-toolbox/pull/12) [`4eda3f5`](https://github.com/sushichan044/eslint-toolbox/commit/4eda3f513aa5a3c2f36a80d7378c363a33a6c2d0) Thanks [@sushichan044](https://github.com/sushichan044)! - update internal dependency
+
+- Updated dependencies [[`4eda3f5`](https://github.com/sushichan044/eslint-toolbox/commit/4eda3f513aa5a3c2f36a80d7378c363a33a6c2d0)]:
+  - @sushichan044/eslint-config-array-resolver@0.1.0
+
 ## 0.0.2
 ### Patch Changes
 
