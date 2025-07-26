@@ -4,6 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "license": "Apache-2.0",
+    "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sushichan044/eslint-toolbox.git",
+    "directory": "packages/eslint-config-resolver"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "provenance": true
+  },
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
