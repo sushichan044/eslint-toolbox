@@ -1,9 +1,13 @@
 {
   "name": "eslint-rule-explorer",
-  "description": "A CLI to get information about ESLint configurations.",
+  "description": "A powerful CLI tool for exploring and analyzing ESLint rules in your projects.",
   "version": "0.0.0",
   "type": "module",
   "license": "Apache-2.0",
+  "author": {
+    "name": "sushichan044",
+    "url": "https://github.com/sushichan044"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sushichan044/eslint-toolbox.git",
