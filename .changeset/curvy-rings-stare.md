@@ -1,5 +1,5 @@
 ---
-"eslint-rule-explorer": minor
+"@sushichan044/eslint-config-array-resolver": minor
 ---
 
 rename readFlatConfig to resolveFlatConfig
