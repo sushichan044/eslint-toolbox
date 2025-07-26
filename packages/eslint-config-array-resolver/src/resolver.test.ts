@@ -1,10 +1,10 @@
 import { createFixture } from "fs-fixture";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
-import { resolveConfigPath } from "./resolver.js";
+import { findConfigPath } from "./resolver.js";
 import { isNonEmptyString } from "./utils.js";
 
-describe("resolveConfigPath", () => {
+describe("findConfigPath", () => {
   let fixture: Awaited<ReturnType<typeof createFixture>>;
 
   beforeEach(async () => {
@@ -160,11 +160,11 @@ describe("resolveConfigPath", () => {
     const cwdPath = fixture.getPath(cwd);
 
     if (testCase.shouldThrow) {
-      expect(() => resolveConfigPath(cwdPath)).toThrow(
+      expect(() => findConfigPath(cwdPath)).toThrow(
         new Error("No eslint config found"),
       );
     } else {
-      const result = resolveConfigPath(cwdPath);
+      const result = findConfigPath(cwdPath);
 
       expect(result).toHaveProperty("basePath");
       expect(result).toHaveProperty("fullPath");

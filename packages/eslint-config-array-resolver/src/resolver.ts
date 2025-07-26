@@ -39,7 +39,12 @@ export interface ESLintConfig {
   payload: Payload;
 }
 
-export const resolveConfigPath = (
+/**
+ * Traverse and find the ESLint config file.
+ *
+ * @internal
+ */
+export const findConfigPath = (
   root: string,
 ): { basePath: string; fullPath: string } => {
   const configPath = findUpAny(
@@ -68,12 +73,12 @@ interface ReadFlatConfigOptions {
   suppressOutput?: boolean;
 }
 
-export const readFlatConfig = async (
+export const resolveFlatConfig = async (
   root: string,
   options: ReadFlatConfigOptions = {},
 ): Promise<ESLintConfig> => {
   const { suppressOutput = false } = options;
-  const { basePath, fullPath } = resolveConfigPath(root);
+  const { basePath, fullPath } = findConfigPath(root);
 
   const moduleImportPromise = runInDirectory(basePath, async () => {
     return bundleRequire({
