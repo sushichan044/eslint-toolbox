@@ -1,4 +1,4 @@
-import { readFlatConfig } from "@sushichan044/eslint-config-array-resolver";
+import { resolveFlatConfig } from "@sushichan044/eslint-config-array-resolver";
 import { resolve } from "path";
 import { describe, expect, it } from "vitest";
 
@@ -6,7 +6,7 @@ import { aggregateRules, searchRuleExact, searchRuleFuzzy } from "./search";
 
 const loadFixture = async (fixtureName: string) => {
   const rootDir = resolve(__dirname, "../test/fixtures", fixtureName);
-  return await readFlatConfig(rootDir);
+  return await resolveFlatConfig(rootDir);
 };
 
 describe("searchRuleExact", () => {
