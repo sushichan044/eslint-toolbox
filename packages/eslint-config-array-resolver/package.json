@@ -1,7 +1,7 @@
 {
   "name": "@sushichan044/eslint-config-array-resolver",
   "description": "Resolves flat config module. For internal use only.",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "license": "Apache-2.0",
   "author": {
@@ -21,7 +21,9 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

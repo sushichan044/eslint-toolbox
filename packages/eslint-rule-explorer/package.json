@@ -1,7 +1,7 @@
 {
   "name": "eslint-rule-explorer",
   "description": "A powerful CLI tool for exploring and analyzing ESLint rules in your projects.",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "license": "Apache-2.0",
   "author": {
@@ -21,7 +21,9 @@
   "bin": {
     "eslint-rule-explorer": "bin/eslint-rule-explorer.mjs"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "eslint --max-warnings 0 --fix .",
     "format": "biome format --write .",
