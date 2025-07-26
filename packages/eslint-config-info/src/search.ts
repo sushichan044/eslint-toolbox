@@ -46,7 +46,7 @@ const createNotFoundResult = (): RuleSearchResult => ({
  * ```
  */
 export const searchRuleExact = (input: RuleSearchInput): RuleSearchResult => {
-  const prepared = prepareRuleSearch(input);
+  const prepared = filterByPlugin(input);
   if (!prepared) {
     return createNotFoundResult();
   }
@@ -70,7 +70,7 @@ export const searchRuleExact = (input: RuleSearchInput): RuleSearchResult => {
  * ```
  */
 export const searchRuleFuzzy = (input: RuleSearchInput): RuleSearchResult => {
-  const prepared = prepareRuleSearch(input);
+  const prepared = filterByPlugin(input);
   if (!prepared) {
     return createNotFoundResult();
   }
@@ -78,12 +78,14 @@ export const searchRuleFuzzy = (input: RuleSearchInput): RuleSearchResult => {
   return findFuzzyRules(prepared);
 };
 
-interface PreparedSearch {
-  pluginRules: Record<string, RuleMetaData>;
+interface PluginFilteredResult {
+  candidatePluginRules: Record<string, RuleMetaData>;
   ruleIdentifier: RuleIdentifierInput;
 }
 
-const prepareRuleSearch = (input: RuleSearchInput): PreparedSearch | null => {
+const filterByPlugin = (
+  input: RuleSearchInput,
+): PluginFilteredResult | null => {
   const ruleIdentifier = extractRuleIdentifier(input.ruleName);
   const rules = aggregateRules(input.config);
 
@@ -93,15 +95,15 @@ const prepareRuleSearch = (input: RuleSearchInput): PreparedSearch | null => {
   }
 
   return {
-    pluginRules,
+    candidatePluginRules: pluginRules,
     ruleIdentifier,
   };
 };
 
-const findExactRule = (prepared: PreparedSearch): RuleSearchResult => {
-  const { pluginRules, ruleIdentifier } = prepared;
+const findExactRule = (prepared: PluginFilteredResult): RuleSearchResult => {
+  const { candidatePluginRules, ruleIdentifier } = prepared;
 
-  const exactRule = pluginRules[ruleIdentifier.name];
+  const exactRule = candidatePluginRules[ruleIdentifier.name];
   if (exactRule !== undefined) {
     return {
       found: true,
@@ -117,10 +119,10 @@ const findExactRule = (prepared: PreparedSearch): RuleSearchResult => {
   return createNotFoundResult();
 };
 
-const findFuzzyRules = (prepared: PreparedSearch): RuleSearchResult => {
-  const { pluginRules, ruleIdentifier } = prepared;
+const findFuzzyRules = (prepared: PluginFilteredResult): RuleSearchResult => {
+  const { candidatePluginRules, ruleIdentifier } = prepared;
 
-  const matchedRules = Object.entries(pluginRules)
+  const matchedRules = Object.entries(candidatePluginRules)
     .filter(([ruleKey]) =>
       ruleKey.toLowerCase().includes(ruleIdentifier.name.toLowerCase()),
     )
