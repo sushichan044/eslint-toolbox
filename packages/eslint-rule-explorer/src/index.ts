@@ -40,7 +40,10 @@ const mainCmd = define({
     const { exact: searchExact, json: printAsJSON, rule: ruleName } = c.values;
 
     const rootDir = c.values.root ?? cwd();
-    const eslintConfig = await readFlatConfig(rootDir);
+    const eslintConfig = await readFlatConfig(rootDir, {
+      // unnecessary stdout will break JSON pipeline like jq
+      suppressOutput: printAsJSON,
+    });
 
     const searchInput = {
       config: eslintConfig,
