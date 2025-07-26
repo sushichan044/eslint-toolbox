@@ -26,7 +26,7 @@
     "build": "tsdown"
   },
   "dependencies": {
-    "@sushichan044/eslint-config-resolver": "workspace:^",
+    "@sushichan044/eslint-config-array-resolver": "workspace:^",
     "gunshi": "^0.27.0-alpha.8"
   },
   "devDependencies": {

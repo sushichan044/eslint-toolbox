@@ -1,6 +1,6 @@
 import type { Args } from "gunshi";
 
-import { readFlatConfig } from "@sushichan044/eslint-config-resolver";
+import { readFlatConfig } from "@sushichan044/eslint-config-array-resolver";
 import { cli, define } from "gunshi";
 import { cwd } from "node:process";
 

@@ -1,8 +1,8 @@
 import { createFixture } from "fs-fixture";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
-import { resolveConfigPath } from "./resolver";
-import { isNonEmptyString } from "./utils";
+import { resolveConfigPath } from "./resolver.js";
+import { isNonEmptyString } from "./utils.js";
 
 describe("resolveConfigPath", () => {
   let fixture: Awaited<ReturnType<typeof createFixture>>;

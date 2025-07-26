@@ -1,4 +1,4 @@
-import { readFlatConfig } from "@sushichan044/eslint-config-resolver";
+import { readFlatConfig } from "@sushichan044/eslint-config-array-resolver";
 import { resolve } from "path";
 import { describe, expect, it } from "vitest";
 

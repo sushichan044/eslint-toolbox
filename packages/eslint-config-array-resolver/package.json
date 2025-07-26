@@ -1,13 +1,13 @@
 {
-  "name": "@sushichan044/eslint-config-resolver",
+  "name": "@sushichan044/eslint-config-array-resolver",
   "description": "Resolves flat config module. For internal use only.",
   "version": "0.0.0",
   "type": "module",
   "license": "Apache-2.0",
-    "repository": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/sushichan044/eslint-toolbox.git",
-    "directory": "packages/eslint-config-resolver"
+    "directory": "packages/eslint-config-array-resolver"
   },
   "publishConfig": {
     "access": "public",

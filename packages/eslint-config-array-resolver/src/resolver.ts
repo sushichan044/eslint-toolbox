@@ -26,7 +26,7 @@ import { any as findUpAny } from "empathic/find";
 import { resolve as resolveModule } from "mlly";
 import { dirname } from "pathe";
 
-import { isNonEmptyString, runInDirectory } from "./utils";
+import { isNonEmptyString, runInDirectory } from "./utils.js";
 
 export interface ESLintConfig {
   configs: FlatConfigItem[];

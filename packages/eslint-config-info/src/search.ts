@@ -1,4 +1,4 @@
-import type { ESLintConfig } from "@sushichan044/eslint-config-resolver";
+import type { ESLintConfig } from "@sushichan044/eslint-config-array-resolver";
 
 import type { FlattenRules, RuleIdentifierInput, RuleMetaData } from "./types";
 
