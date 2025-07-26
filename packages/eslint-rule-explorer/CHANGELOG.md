@@ -1,5 +1,15 @@
 # eslint-rule-explorer
 
+## 0.0.2
+### Patch Changes
+
+
+
+- [#10](https://github.com/sushichan044/eslint-toolbox/pull/10) [`b0223eb`](https://github.com/sushichan044/eslint-toolbox/commit/b0223eba293005fa551afe6ee87883244f6f3622) Thanks [@sushichan044](https://github.com/sushichan044)! - fix: suppress logs from eslint config module when `--json` passed
+
+- Updated dependencies [[`b0223eb`](https://github.com/sushichan044/eslint-toolbox/commit/b0223eba293005fa551afe6ee87883244f6f3622)]:
+  - @sushichan044/eslint-config-array-resolver@0.0.2
+
 ## 0.0.1
 ### Patch Changes
 
