@@ -1,5 +1,5 @@
 {
-  "name": "@sushichan044/eslint-config-info",
+  "name": "eslint-rule-explorer",
   "description": "A CLI to get information about ESLint configurations.",
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +7,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sushichan044/eslint-toolbox.git",
-    "directory": "packages/eslint-config-info"
+    "directory": "packages/eslint-rule-explorer"
   },
   "publishConfig": {
     "access": "public",
@@ -15,7 +15,7 @@
     "provenance": true
   },
   "bin": {
-    "eslint-config-info": "bin/eslint-config-info.mjs"
+    "eslint-rule-explorer": "bin/eslint-rule-explorer.mjs"
   },
   "files": ["dist"],
   "scripts": {
