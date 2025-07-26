@@ -14,6 +14,7 @@
  * - only accepts root: string as parameter
  * - explicitly move to the directory of the eslint config file
  * - use empathic instead of find-up to find the config file
+ * - suppress unnecessary output when importing the config module
  *
  * For full license and copyright information, see the LICENSE and NOTICE files.
  */
