@@ -8,6 +8,7 @@ on:
       - opened
       - synchronize
       - reopened
+      - labeled # need to run if `cr-tracked` label is added
     paths:
       - "packages/**"
       - "package.json"
