@@ -10,7 +10,7 @@ import {
   version as pkgVersion,
 } from "../package.json";
 import { formatRuleInfo } from "./format";
-import { searchRuleExact, searchRuleFuzzy } from "./search";
+import { searchRule } from "./search";
 
 const mainCmd = define({
   args: {
@@ -50,9 +50,9 @@ const mainCmd = define({
       ruleName,
     };
 
-    const searchResult = searchExact
-      ? searchRuleExact(searchInput)
-      : searchRuleFuzzy(searchInput);
+    const searchResult = searchRule(searchInput, {
+      strategy: searchExact ? "exact" : "fuzzy",
+    });
 
     if (printAsJSON) {
       console.log(JSON.stringify(searchResult.rules, null, 2));
@@ -76,6 +76,5 @@ export const run = async (argv: string[]): Promise<string | undefined> =>
     description: pkgDescription,
     name: pkgName,
     renderHeader: null, // disable header rendering
-    // subCommands,
     version: pkgVersion,
   });
