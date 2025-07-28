@@ -1,5 +1,12 @@
 # eslint-rule-explorer
 
+## 0.1.1
+### Patch Changes
+
+
+
+- [#18](https://github.com/sushichan044/eslint-toolbox/pull/18) [`937633e`](https://github.com/sushichan044/eslint-toolbox/commit/937633e9eaa1fc4cfe585eb4b3568f414a670615) Thanks [@sushichan044](https://github.com/sushichan044)! - refactor: simplify find params and returns
+
 ## 0.1.0
 ### Minor Changes
 
