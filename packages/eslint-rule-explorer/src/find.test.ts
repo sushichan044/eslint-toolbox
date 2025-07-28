@@ -2,7 +2,7 @@ import { resolveFlatConfig } from "@sushichan044/eslint-config-array-resolver";
 import { resolve } from "path";
 import { describe, expect, it } from "vitest";
 
-import { searchRule } from "./search";
+import { findRule } from "./find";
 import { extractRules } from "./utils";
 
 const loadFixture = async (fixtureName: string) => {
@@ -13,7 +13,7 @@ const loadFixture = async (fixtureName: string) => {
 describe("searchRule with exact strategy", () => {
   it("should find exact ESLint builtin rule", async () => {
     const config = await loadFixture("basic-config");
-    const result = searchRule(
+    const result = findRule(
       { config, ruleName: "no-unused-vars" },
       { strategy: "exact" },
     );
@@ -27,7 +27,7 @@ describe("searchRule with exact strategy", () => {
 
   it("should find exact plugin rule", async () => {
     const config = await loadFixture("plugin-config");
-    const result = searchRule(
+    const result = findRule(
       {
         config,
         ruleName: "@typescript-eslint/no-explicit-any",
@@ -44,7 +44,7 @@ describe("searchRule with exact strategy", () => {
 
   it("should return found: false for non-existent rule", async () => {
     const config = await loadFixture("basic-config");
-    const result = searchRule(
+    const result = findRule(
       { config, ruleName: "non-existent-rule" },
       { strategy: "exact" },
     );
@@ -57,7 +57,7 @@ describe("searchRule with exact strategy", () => {
 
   it("should return found: false for non-existent plugin", async () => {
     const config = await loadFixture("basic-config");
-    const result = searchRule(
+    const result = findRule(
       {
         config,
         ruleName: "@non-existent/some-rule",
@@ -75,7 +75,7 @@ describe("searchRule with exact strategy", () => {
     const config = await loadFixture("basic-config");
 
     expect(() => {
-      searchRule(
+      findRule(
         { config, ruleName: "invalid/rule/name/format" },
         { strategy: "exact" },
       );
@@ -86,7 +86,7 @@ describe("searchRule with exact strategy", () => {
 describe("searchRule with fuzzy strategy", () => {
   it("should find rule by partial match", async () => {
     const config = await loadFixture("basic-config");
-    const result = searchRule(
+    const result = findRule(
       { config, ruleName: "unused" },
       { strategy: "includes" },
     );
@@ -100,7 +100,7 @@ describe("searchRule with fuzzy strategy", () => {
 
   it("should perform case-insensitive search", async () => {
     const config = await loadFixture("basic-config");
-    const result = searchRule(
+    const result = findRule(
       { config, ruleName: "UNUSED" },
       { strategy: "includes" },
     );
@@ -114,7 +114,7 @@ describe("searchRule with fuzzy strategy", () => {
 
   it("should find multiple results in multi-plugin config", async () => {
     const config = await loadFixture("multi-plugin-config");
-    const result = searchRule(
+    const result = findRule(
       { config, ruleName: "unused" },
       { strategy: "includes" },
     );
@@ -130,7 +130,7 @@ describe("searchRule with fuzzy strategy", () => {
 
   it("should find plugin rule by fuzzy search", async () => {
     const config = await loadFixture("plugin-config");
-    const result = searchRule(
+    const result = findRule(
       {
         config,
         ruleName: "@typescript-eslint/explicit",
@@ -147,7 +147,7 @@ describe("searchRule with fuzzy strategy", () => {
 
   it("should return found: false when no matches found", async () => {
     const config = await loadFixture("basic-config");
-    const result = searchRule(
+    const result = findRule(
       {
         config,
         ruleName: "definitely-non-existent-rule-name",
@@ -242,7 +242,7 @@ describe("extractRules", () => {
 describe("searchRule with filter options", () => {
   it("should filter rules by custom criteria", async () => {
     const config = await loadFixture("basic-config");
-    const result = searchRule(
+    const result = findRule(
       { config, ruleName: "unused" },
       {
         filter: (rule) => rule.type === "problem",
@@ -260,7 +260,7 @@ describe("searchRule with filter options", () => {
 
   it("should return no results when filter excludes all matches", async () => {
     const config = await loadFixture("basic-config");
-    const result = searchRule(
+    const result = findRule(
       { config, ruleName: "unused" },
       {
         filter: () => false, // Filter out everything
@@ -274,11 +274,11 @@ describe("searchRule with filter options", () => {
 
   it("should work without filter (same as original behavior)", async () => {
     const config = await loadFixture("basic-config");
-    const resultWithoutFilter = searchRule(
+    const resultWithoutFilter = findRule(
       { config, ruleName: "unused" },
       { strategy: "includes" },
     );
-    const resultWithPassthroughFilter = searchRule(
+    const resultWithPassthroughFilter = findRule(
       { config, ruleName: "unused" },
       {
         filter: () => true, // Allow everything
@@ -291,7 +291,7 @@ describe("searchRule with filter options", () => {
 
   it("should filter deprecated rules", async () => {
     const config = await loadFixture("basic-config");
-    const result = searchRule(
+    const result = findRule(
       { config, ruleName: "" }, // Empty string to get all rules
       {
         filter: (rule) => rule.deprecated === true,
@@ -311,7 +311,7 @@ describe("searchRule strategy validation", () => {
     const config = await loadFixture("basic-config");
 
     expect(() => {
-      searchRule(
+      findRule(
         { config, ruleName: "no-unused-vars" },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
         { strategy: "unknown" as any },

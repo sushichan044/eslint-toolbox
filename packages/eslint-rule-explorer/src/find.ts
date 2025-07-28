@@ -8,7 +8,7 @@ import type {
 
 import { extractRules } from "./utils";
 
-interface RuleSearchInput {
+interface RuleFindParams {
   config: ESLintConfig;
   /**
    * The rule name to search for.
@@ -23,7 +23,7 @@ interface RuleSearchInput {
   ruleName: string;
 }
 
-interface RuleSearchOptions {
+export interface RuleFindOptions {
   /**
    * A function to filter rules based on custom criteria.
    *
@@ -42,7 +42,7 @@ interface RuleSearchOptions {
   strategy?: SearchStrategy;
 }
 
-interface RuleSearchResult {
+interface RuleFindResult {
   found: boolean;
   rules: Array<{
     info: RuleMetaData;
@@ -50,16 +50,16 @@ interface RuleSearchResult {
   }>;
 }
 
-const createNotFoundResult = (): RuleSearchResult => ({
+const createNotFoundResult = (): RuleFindResult => ({
   found: false,
   rules: [],
 });
 
-export const searchRule = (
-  input: RuleSearchInput,
-  options: RuleSearchOptions,
-): RuleSearchResult => {
-  const prepared = filterByPlugin(input);
+export const findRule = (
+  params: RuleFindParams,
+  options: RuleFindOptions,
+): RuleFindResult => {
+  const prepared = filterByPlugin(params);
   if (!prepared) {
     return createNotFoundResult();
   }
@@ -98,10 +98,10 @@ interface PluginFilteredResult {
 }
 
 const filterByPlugin = (
-  input: RuleSearchInput,
+  params: RuleFindParams,
 ): PluginFilteredResult | null => {
-  const ruleIdentifier = extractRuleIdentifier(input.ruleName);
-  const rules = extractRules(input.config);
+  const ruleIdentifier = extractRuleIdentifier(params.ruleName);
+  const rules = extractRules(params.config);
 
   const pluginRules = rules[ruleIdentifier.plugin];
   if (!pluginRules) {
@@ -116,7 +116,7 @@ const filterByPlugin = (
 
 const findExactRule = (
   prepared: PluginFilteredResult,
-): RuleSearchResult["rules"] => {
+): RuleFindResult["rules"] => {
   const { candidatePluginRules, ruleIdentifier } = prepared;
 
   const exactRule = candidatePluginRules[ruleIdentifier.name];
@@ -134,7 +134,7 @@ const findExactRule = (
 
 const findFuzzyRules = (
   prepared: PluginFilteredResult,
-): RuleSearchResult["rules"] => {
+): RuleFindResult["rules"] => {
   const { candidatePluginRules, ruleIdentifier } = prepared;
 
   return Object.entries(candidatePluginRules)
