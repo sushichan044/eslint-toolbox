@@ -18,21 +18,31 @@ eslint-rule-explorer is a modern CLI tool that helps developers explore, search,
 
 ## Installation
 
-### Global Installation (Recommended)
+### Global Installation
+
+Recommended for CLI usage.
 
 ```bash
 npm install -g eslint-rule-explorer
 ```
 
-### Local Installation
+Or you can just use `npx` to run it without installing globally:
 
 ```bash
-npx npym add -D eslint-rule-explorer
+npx eslint-rule-explorer
 ```
 
-## Examples
+### Local Installation
 
-### Common Use Cases
+Recommended for programmatic use.
+
+```bash
+npx npym add eslint-rule-explorer
+```
+
+## Usage
+
+### CLI Examples
 
 ```bash
 # See information about `@typescript-eslint/no-explicit-any`
@@ -52,19 +62,71 @@ eslint-rule-explorer --root ./my-project unused
 
 # Find all rules related to imports
 eslint-rule-explorer import
+
+# Extract documentation URLs with shell scripts
+eslint-rule-explorer no-unused-vars --json | jq -r '.[].info.docs.url'
+# https://eslint.org/docs/latest/rules/no-unused-vars
 ```
 
-### Integrate with shell scripts
+### JavaScript API
+
+For programmatic use in Node.js applications:
 
 ```bash
-$ eslint-rule-explorer no-unused-vars --json | jq -r '.[].info.docs.url'
-
-https://eslint.org/docs/latest/rules/no-unused-vars
+npm install eslint-rule-explorer
 ```
 
-## Output Format
+```javascript
+import { searchESLintRule } from 'eslint-rule-explorer';
 
-### Human-Readable Output
+// Search for rules with fuzzy matching using `Array.includes`
+const results = await searchESLintRule('no-unused');
+
+// Exact search
+const exactResults = await searchESLintRule('no-unused-vars', {
+  exact: true
+});
+
+// Custom project root
+const customResults = await searchESLintRule('typescript', {
+  rootDir: '/path/to/your/project'
+});
+
+// Suppress console output from side effect of resolving ESLint config
+// (useful for JSON pipelines)
+const quietResults = await searchESLintRule('react', {
+  suppressOutput: true
+});
+```
+
+#### API Reference
+
+For detailed API documentation including all available options and return types, see the [implementation](./src/index.ts).
+
+#### Integration Examples
+
+```javascript
+// Find all TypeScript ESLint rules
+const tsRules = await searchESLintRule('@typescript-eslint', {
+  suppressOutput: true
+});
+
+// Extract documentation URLs
+const urls = tsRules
+  .filter(rule => rule.info.docs?.url)
+  .map(rule => rule.info.docs.url);
+
+// Find fixable rules only
+const fixableRules = await searchESLintRule('', {
+  exact: false
+}).then(rules =>
+  rules.filter(rule => rule.info.fixable)
+);
+```
+
+## CLI Output Format
+
+### Human-Readable Output (Default)
 
 The default output format provides comprehensive information about each rule:
 
