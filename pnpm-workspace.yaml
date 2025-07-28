@@ -3,6 +3,7 @@ packages:
 
 catalogs:
   build:
+    "@arethetypeswrong/cli": 0.18.2
     publint: 0.3.12
     tsdown: 0.13.0
     unplugin-unused: 0.5.1
