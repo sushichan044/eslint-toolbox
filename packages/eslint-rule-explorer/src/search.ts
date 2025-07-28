@@ -1,6 +1,10 @@
 import type { ESLintConfig } from "@sushichan044/eslint-config-array-resolver";
 
-import type { RuleIdentifierInput, RuleMetaData } from "./types";
+import type {
+  RuleIdentifierInput,
+  RuleMetaData,
+  SearchStrategy,
+} from "./types";
 
 import { extractRules } from "./utils";
 
@@ -28,7 +32,14 @@ interface RuleSearchOptions {
    */
   filter?: (rule: RuleMetaData) => boolean;
 
-  strategy: "exact" | "fuzzy";
+  /**
+   * Search strategy to use.
+   * - `exact`: Match the rule name exactly.
+   * - `includes`: Match the rule name using `Array.includes`.
+   *
+   * @default `includes`
+   */
+  strategy?: SearchStrategy;
 }
 
 interface RuleSearchResult {
@@ -52,16 +63,17 @@ export const searchRule = (
   if (!prepared) {
     return createNotFoundResult();
   }
+  const strategy = options.strategy ?? "includes";
 
   const foundRules = (() => {
-    switch (options.strategy) {
+    switch (strategy) {
       case "exact":
         return findExactRule(prepared);
-      case "fuzzy":
+      case "includes":
         return findFuzzyRules(prepared);
       default:
         throw new Error(
-          `Unknown search strategy: ${String(options.strategy satisfies never)}`,
+          `Unknown search strategy: ${String(strategy satisfies never)}`,
         );
     }
   })();

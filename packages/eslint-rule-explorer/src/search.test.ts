@@ -88,7 +88,7 @@ describe("searchRule with fuzzy strategy", () => {
     const config = await loadFixture("basic-config");
     const result = searchRule(
       { config, ruleName: "unused" },
-      { strategy: "fuzzy" },
+      { strategy: "includes" },
     );
 
     expect(result.found).toBe(true);
@@ -102,7 +102,7 @@ describe("searchRule with fuzzy strategy", () => {
     const config = await loadFixture("basic-config");
     const result = searchRule(
       { config, ruleName: "UNUSED" },
-      { strategy: "fuzzy" },
+      { strategy: "includes" },
     );
 
     expect(result.found).toBe(true);
@@ -116,7 +116,7 @@ describe("searchRule with fuzzy strategy", () => {
     const config = await loadFixture("multi-plugin-config");
     const result = searchRule(
       { config, ruleName: "unused" },
-      { strategy: "fuzzy" },
+      { strategy: "includes" },
     );
 
     expect(result.found).toBe(true);
@@ -135,7 +135,7 @@ describe("searchRule with fuzzy strategy", () => {
         config,
         ruleName: "@typescript-eslint/explicit",
       },
-      { strategy: "fuzzy" },
+      { strategy: "includes" },
     );
 
     expect(result.found).toBe(true);
@@ -152,7 +152,7 @@ describe("searchRule with fuzzy strategy", () => {
         config,
         ruleName: "definitely-non-existent-rule-name",
       },
-      { strategy: "fuzzy" },
+      { strategy: "includes" },
     );
 
     expect(result).toEqual({
@@ -246,7 +246,7 @@ describe("searchRule with filter options", () => {
       { config, ruleName: "unused" },
       {
         filter: (rule) => rule.type === "problem",
-        strategy: "fuzzy",
+        strategy: "includes",
       },
     );
 
@@ -264,7 +264,7 @@ describe("searchRule with filter options", () => {
       { config, ruleName: "unused" },
       {
         filter: () => false, // Filter out everything
-        strategy: "fuzzy",
+        strategy: "includes",
       },
     );
 
@@ -276,13 +276,13 @@ describe("searchRule with filter options", () => {
     const config = await loadFixture("basic-config");
     const resultWithoutFilter = searchRule(
       { config, ruleName: "unused" },
-      { strategy: "fuzzy" },
+      { strategy: "includes" },
     );
     const resultWithPassthroughFilter = searchRule(
       { config, ruleName: "unused" },
       {
         filter: () => true, // Allow everything
-        strategy: "fuzzy",
+        strategy: "includes",
       },
     );
 
@@ -295,7 +295,7 @@ describe("searchRule with filter options", () => {
       { config, ruleName: "" }, // Empty string to get all rules
       {
         filter: (rule) => rule.deprecated === true,
-        strategy: "fuzzy",
+        strategy: "includes",
       },
     );
 
