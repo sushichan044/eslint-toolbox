@@ -39,7 +39,7 @@
     "build:check": "pnpm run build && pnpm pack && attw"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "0.18.2",
+    "@arethetypeswrong/cli": "catalog:build",
     "@biomejs/biome": "catalog:biome",
     "@types/node": "24.1.0",
     "@typescript-eslint/utils": "8.38.0",

@@ -79,12 +79,15 @@ npm install eslint-rule-explorer
 ```javascript
 import { searchESLintRule } from 'eslint-rule-explorer';
 
-// Search for rules with fuzzy matching using `Array.includes`
+// Search for rules with fuzzy matching using `String.includes`
 const results = await searchESLintRule('no-unused');
+const results = await searchESLintRule('no-unused', {
+  strategy: 'includes'
+});
 
 // Exact search
 const exactResults = await searchESLintRule('no-unused-vars', {
-  exact: true
+  strategy: 'exact'
 });
 
 // Custom project root
@@ -118,7 +121,7 @@ const urls = tsRules
 
 // Find fixable rules only
 const fixableRules = await searchESLintRule('', {
-  exact: false
+  strategy: 'includes'
 }).then(rules =>
   rules.filter(rule => rule.info.fixable)
 );
