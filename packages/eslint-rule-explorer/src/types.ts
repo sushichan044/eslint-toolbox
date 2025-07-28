@@ -1,5 +1,7 @@
 import type { RulesMeta } from "@eslint/core";
 
+export type SearchStrategy = "exact" | "includes";
+
 export type RuleMetaData = RulesMeta<string, unknown[], unknown> & {
   name: string;
   plugin: string;

@@ -3,7 +3,7 @@ import { defineConfig } from "tsdown";
 export default defineConfig({
   clean: true,
   dts: true,
-  entry: ["src/index.ts"],
+  entry: ["src/index.ts", "src/cli.ts"],
   format: "esm",
   minify: "dce-only",
   nodeProtocol: true,
@@ -11,6 +11,5 @@ export default defineConfig({
   publint: true,
   sourcemap: false,
   treeshake: true,
-  unbundle: true,
   unused: true,
 });

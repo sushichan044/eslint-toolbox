@@ -21,6 +21,12 @@
   "bin": {
     "eslint-rule-explorer": "bin/eslint-rule-explorer.mjs"
   },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "files": [
     "dist"
   ],

@@ -1,10 +1,14 @@
 import type { ESLintConfig } from "@sushichan044/eslint-config-array-resolver";
 
-import type { RuleIdentifierInput, RuleMetaData } from "./types";
+import type {
+  RuleIdentifierInput,
+  RuleMetaData,
+  SearchStrategy,
+} from "./types";
 
 import { extractRules } from "./utils";
 
-interface RuleSearchInput {
+interface RuleFindParams {
   config: ESLintConfig;
   /**
    * The rule name to search for.
@@ -19,7 +23,7 @@ interface RuleSearchInput {
   ruleName: string;
 }
 
-interface RuleSearchOptions {
+export interface RuleFindOptions {
   /**
    * A function to filter rules based on custom criteria.
    *
@@ -28,10 +32,17 @@ interface RuleSearchOptions {
    */
   filter?: (rule: RuleMetaData) => boolean;
 
-  strategy: "exact" | "fuzzy";
+  /**
+   * Search strategy to use.
+   * - `exact`: Match the rule name exactly.
+   * - `includes`: Match the rule name using `Array.includes`.
+   *
+   * @default `includes`
+   */
+  strategy?: SearchStrategy;
 }
 
-interface RuleSearchResult {
+interface RuleFindResult {
   found: boolean;
   rules: Array<{
     info: RuleMetaData;
@@ -39,29 +50,30 @@ interface RuleSearchResult {
   }>;
 }
 
-const createNotFoundResult = (): RuleSearchResult => ({
+const createNotFoundResult = (): RuleFindResult => ({
   found: false,
   rules: [],
 });
 
-export const searchRule = (
-  input: RuleSearchInput,
-  options: RuleSearchOptions,
-): RuleSearchResult => {
-  const prepared = filterByPlugin(input);
+export const findRule = (
+  params: RuleFindParams,
+  options: RuleFindOptions,
+): RuleFindResult => {
+  const prepared = filterByPlugin(params);
   if (!prepared) {
     return createNotFoundResult();
   }
+  const strategy = options.strategy ?? "includes";
 
   const foundRules = (() => {
-    switch (options.strategy) {
+    switch (strategy) {
       case "exact":
         return findExactRule(prepared);
-      case "fuzzy":
+      case "includes":
         return findFuzzyRules(prepared);
       default:
         throw new Error(
-          `Unknown search strategy: ${String(options.strategy satisfies never)}`,
+          `Unknown search strategy: ${String(strategy satisfies never)}`,
         );
     }
   })();
@@ -86,10 +98,10 @@ interface PluginFilteredResult {
 }
 
 const filterByPlugin = (
-  input: RuleSearchInput,
+  params: RuleFindParams,
 ): PluginFilteredResult | null => {
-  const ruleIdentifier = extractRuleIdentifier(input.ruleName);
-  const rules = extractRules(input.config);
+  const ruleIdentifier = extractRuleIdentifier(params.ruleName);
+  const rules = extractRules(params.config);
 
   const pluginRules = rules[ruleIdentifier.plugin];
   if (!pluginRules) {
@@ -104,7 +116,7 @@ const filterByPlugin = (
 
 const findExactRule = (
   prepared: PluginFilteredResult,
-): RuleSearchResult["rules"] => {
+): RuleFindResult["rules"] => {
   const { candidatePluginRules, ruleIdentifier } = prepared;
 
   const exactRule = candidatePluginRules[ruleIdentifier.name];
@@ -122,7 +134,7 @@ const findExactRule = (
 
 const findFuzzyRules = (
   prepared: PluginFilteredResult,
-): RuleSearchResult["rules"] => {
+): RuleFindResult["rules"] => {
   const { candidatePluginRules, ruleIdentifier } = prepared;
 
   return Object.entries(candidatePluginRules)
