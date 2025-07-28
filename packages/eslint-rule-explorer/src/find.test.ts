@@ -18,7 +18,6 @@ describe("searchRule with exact strategy", () => {
       { strategy: "exact" },
     );
 
-    expect(result.found).toBe(true);
     expect(result.rules).toHaveLength(1);
     expect(result.rules[0]?.name).toBe("eslint/no-unused-vars");
     expect(result.rules[0]?.info.plugin).toBe("eslint");
@@ -35,14 +34,13 @@ describe("searchRule with exact strategy", () => {
       { strategy: "exact" },
     );
 
-    expect(result.found).toBe(true);
     expect(result.rules).toHaveLength(1);
     expect(result.rules[0]?.name).toBe("@typescript-eslint/no-explicit-any");
     expect(result.rules[0]?.info.plugin).toBe("@typescript-eslint");
     expect(result.rules[0]?.info.name).toBe("no-explicit-any");
   });
 
-  it("should return found: false for non-existent rule", async () => {
+  it("should return empty array for non-existent rule", async () => {
     const config = await loadFixture("basic-config");
     const result = findRule(
       { config, ruleName: "non-existent-rule" },
@@ -50,12 +48,11 @@ describe("searchRule with exact strategy", () => {
     );
 
     expect(result).toEqual({
-      found: false,
       rules: [],
     });
   });
 
-  it("should return found: false for non-existent plugin", async () => {
+  it("should return empty array for non-existent plugin", async () => {
     const config = await loadFixture("basic-config");
     const result = findRule(
       {
@@ -66,7 +63,6 @@ describe("searchRule with exact strategy", () => {
     );
 
     expect(result).toEqual({
-      found: false,
       rules: [],
     });
   });
@@ -91,7 +87,6 @@ describe("searchRule with fuzzy strategy", () => {
       { strategy: "includes" },
     );
 
-    expect(result.found).toBe(true);
     expect(result.rules.length).toBeGreaterThan(0);
     expect(
       result.rules.some((rule) => rule.name.includes("no-unused-vars")),
@@ -105,7 +100,6 @@ describe("searchRule with fuzzy strategy", () => {
       { strategy: "includes" },
     );
 
-    expect(result.found).toBe(true);
     expect(result.rules.length).toBeGreaterThan(0);
     expect(
       result.rules.some((rule) => rule.name.includes("no-unused-vars")),
@@ -119,7 +113,6 @@ describe("searchRule with fuzzy strategy", () => {
       { strategy: "includes" },
     );
 
-    expect(result.found).toBe(true);
     expect(result.rules.length).toBeGreaterThan(1);
 
     const ruleNames = result.rules.map((rule) => rule.name);
@@ -138,14 +131,13 @@ describe("searchRule with fuzzy strategy", () => {
       { strategy: "includes" },
     );
 
-    expect(result.found).toBe(true);
     expect(result.rules.length).toBeGreaterThan(0);
     expect(
       result.rules.some((rule) => rule.name.includes("no-explicit-any")),
     ).toBe(true);
   });
 
-  it("should return found: false when no matches found", async () => {
+  it("should return empty array when no matches found", async () => {
     const config = await loadFixture("basic-config");
     const result = findRule(
       {
@@ -156,7 +148,6 @@ describe("searchRule with fuzzy strategy", () => {
     );
 
     expect(result).toEqual({
-      found: false,
       rules: [],
     });
   });
@@ -236,73 +227,6 @@ describe("extractRules", () => {
         type: expect.any(String),
       }),
     );
-  });
-});
-
-describe("searchRule with filter options", () => {
-  it("should filter rules by custom criteria", async () => {
-    const config = await loadFixture("basic-config");
-    const result = findRule(
-      { config, ruleName: "unused" },
-      {
-        filter: (rule) => rule.type === "problem",
-        strategy: "includes",
-      },
-    );
-
-    expect(result.found).toBe(true);
-    expect(result.rules.length).toBeGreaterThan(0);
-    // All returned rules should match the filter
-    for (const rule of result.rules) {
-      expect(rule.info.type).toBe("problem");
-    }
-  });
-
-  it("should return no results when filter excludes all matches", async () => {
-    const config = await loadFixture("basic-config");
-    const result = findRule(
-      { config, ruleName: "unused" },
-      {
-        filter: () => false, // Filter out everything
-        strategy: "includes",
-      },
-    );
-
-    expect(result.found).toBe(false);
-    expect(result.rules).toHaveLength(0);
-  });
-
-  it("should work without filter (same as original behavior)", async () => {
-    const config = await loadFixture("basic-config");
-    const resultWithoutFilter = findRule(
-      { config, ruleName: "unused" },
-      { strategy: "includes" },
-    );
-    const resultWithPassthroughFilter = findRule(
-      { config, ruleName: "unused" },
-      {
-        filter: () => true, // Allow everything
-        strategy: "includes",
-      },
-    );
-
-    expect(resultWithoutFilter).toEqual(resultWithPassthroughFilter);
-  });
-
-  it("should filter deprecated rules", async () => {
-    const config = await loadFixture("basic-config");
-    const result = findRule(
-      { config, ruleName: "" }, // Empty string to get all rules
-      {
-        filter: (rule) => rule.deprecated === true,
-        strategy: "includes",
-      },
-    );
-
-    // All returned rules should be deprecated
-    for (const rule of result.rules) {
-      expect(rule.info.deprecated).toBe(true);
-    }
   });
 });
 
