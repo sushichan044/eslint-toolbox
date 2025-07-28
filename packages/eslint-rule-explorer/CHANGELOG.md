@@ -1,5 +1,12 @@
 # eslint-rule-explorer
 
+## 0.1.0
+### Minor Changes
+
+
+
+- [#15](https://github.com/sushichan044/eslint-toolbox/pull/15) [`d2bca34`](https://github.com/sushichan044/eslint-toolbox/commit/d2bca3429416c1de759cb4e21aedac19689bed5e) Thanks [@sushichan044](https://github.com/sushichan044)! - feat: add JavaScript API
+
 ## 0.0.3
 ### Patch Changes
 
