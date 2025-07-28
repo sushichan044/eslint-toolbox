@@ -25,14 +25,6 @@ interface RuleFindParams {
 
 export interface RuleFindOptions {
   /**
-   * A function to filter rules based on custom criteria.
-   *
-   * @param rule - The rule metadata to evaluate.
-   * @returns True if the rule matches the criteria, false otherwise.
-   */
-  filter?: (rule: RuleMetaData) => boolean;
-
-  /**
    * Search strategy to use.
    * - `exact`: Match the rule name exactly.
    * - `includes`: Match the rule name using `String.includes`.
@@ -43,17 +35,11 @@ export interface RuleFindOptions {
 }
 
 interface RuleFindResult {
-  found: boolean;
   rules: Array<{
     info: RuleMetaData;
     name: string;
   }>;
 }
-
-const createNotFoundResult = (): RuleFindResult => ({
-  found: false,
-  rules: [],
-});
 
 export const findRule = (
   params: RuleFindParams,
@@ -61,7 +47,7 @@ export const findRule = (
 ): RuleFindResult => {
   const prepared = filterByPlugin(params);
   if (!prepared) {
-    return createNotFoundResult();
+    return { rules: [] };
   }
   const strategy = options.strategy ?? "includes";
 
@@ -78,17 +64,8 @@ export const findRule = (
     }
   })();
 
-  const filteredRules = options.filter
-    ? foundRules.filter((rule) => options.filter?.(rule.info) ?? true)
-    : foundRules;
-
-  if (filteredRules.length === 0) {
-    return createNotFoundResult();
-  }
-
   return {
-    found: true,
-    rules: filteredRules,
+    rules: foundRules,
   };
 };
 
