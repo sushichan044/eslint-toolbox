@@ -2,13 +2,13 @@ import type { Args } from "gunshi";
 
 import { cli, define } from "gunshi";
 
-import { searchESLintRule } from ".";
 import {
   description as pkgDescription,
   name as pkgName,
   version as pkgVersion,
-} from "../package.json";
+} from "../package.json" with { type: "json" };
 import { formatRuleInfo } from "./format";
+import { searchESLintRule } from "./index";
 
 const mainCmd = define({
   args: {
