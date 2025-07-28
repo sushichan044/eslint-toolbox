@@ -35,7 +35,7 @@ export interface RuleFindOptions {
   /**
    * Search strategy to use.
    * - `exact`: Match the rule name exactly.
-   * - `includes`: Match the rule name using `Array.includes`.
+   * - `includes`: Match the rule name using `String.includes`.
    *
    * @default `includes`
    */
