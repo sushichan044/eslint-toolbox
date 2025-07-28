@@ -40,7 +40,7 @@ describe("searchRule with exact strategy", () => {
     expect(result.rules[0]?.info.name).toBe("no-explicit-any");
   });
 
-  it("should return found: false for non-existent rule", async () => {
+  it("should return empty array for non-existent rule", async () => {
     const config = await loadFixture("basic-config");
     const result = findRule(
       { config, ruleName: "non-existent-rule" },
@@ -48,12 +48,11 @@ describe("searchRule with exact strategy", () => {
     );
 
     expect(result).toEqual({
-      found: false,
       rules: [],
     });
   });
 
-  it("should return found: false for non-existent plugin", async () => {
+  it("should return empty array for non-existent plugin", async () => {
     const config = await loadFixture("basic-config");
     const result = findRule(
       {
@@ -64,7 +63,6 @@ describe("searchRule with exact strategy", () => {
     );
 
     expect(result).toEqual({
-      found: false,
       rules: [],
     });
   });
@@ -139,7 +137,7 @@ describe("searchRule with fuzzy strategy", () => {
     ).toBe(true);
   });
 
-  it("should return found: false when no matches found", async () => {
+  it("should return empty array when no matches found", async () => {
     const config = await loadFixture("basic-config");
     const result = findRule(
       {
@@ -150,7 +148,6 @@ describe("searchRule with fuzzy strategy", () => {
     );
 
     expect(result).toEqual({
-      found: false,
       rules: [],
     });
   });
