@@ -6,7 +6,7 @@ import { findRule } from "./find";
 import { extractRules } from "./utils";
 
 const loadFixture = async (fixtureName: string) => {
-  const rootDir = resolve(__dirname, "../test/fixtures", fixtureName);
+  const rootDir = resolve(import.meta.dirname, "../test/fixtures", fixtureName);
   return await resolveFlatConfig(rootDir);
 };
 
