@@ -1,4 +1,4 @@
-name: Release
+name: Publish to npm
 
 on:
   push:
@@ -12,6 +12,9 @@ concurrency:
 defaults:
   run:
     shell: bash
+
+permissions:
+  contents: read
 
 jobs:
   release:
@@ -32,6 +35,10 @@ jobs:
       - name: Setup Node.js and pnpm
         uses: ./.github/actions/setup-node-pnpm
 
+      - name: Setup latest npm to use trusted publish
+        run: |
+          npm install -g npm@latest
+
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba # v1.5.3
@@ -39,4 +46,3 @@ jobs:
           publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
