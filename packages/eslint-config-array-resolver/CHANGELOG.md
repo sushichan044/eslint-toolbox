@@ -1,5 +1,12 @@
 # @sushichan044/eslint-config-array-resolver
 
+## 0.1.1
+### Patch Changes
+
+
+
+- [#21](https://github.com/sushichan044/eslint-toolbox/pull/21) [`62fe2c0`](https://github.com/sushichan044/eslint-toolbox/commit/62fe2c06a78cb07fdcada6f95588765938cc689f) Thanks [@sushichan044](https://github.com/sushichan044)! - ci: Migrate into OIDC trusted publishing
+
 ## 0.1.0
 ### Minor Changes
 
