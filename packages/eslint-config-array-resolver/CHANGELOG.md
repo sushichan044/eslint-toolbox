@@ -1,5 +1,12 @@
 # @sushichan044/eslint-config-array-resolver
 
+## 0.1.2
+### Patch Changes
+
+
+
+- [#24](https://github.com/sushichan044/eslint-toolbox/pull/24) [`93bdf37`](https://github.com/sushichan044/eslint-toolbox/commit/93bdf3759d0f9f47f1d1d6934e15d2282c696c65) Thanks [@sushichan044](https://github.com/sushichan044)! - chore(deps): mark `@typescript-eslint/utils` as dependency
+
 ## 0.1.1
 ### Patch Changes
 
