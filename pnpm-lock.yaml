@@ -84,6 +84,9 @@ importers:
 
   packages/eslint-config-array-resolver:
     dependencies:
+      '@typescript-eslint/utils':
+        specifier: ^8.0.0
+        version: 8.38.0(eslint@9.31.0(jiti@2.5.1))(typescript@5.8.3)
       bundle-require:
         specifier: ^5.1.0
         version: 5.1.0(esbuild@0.25.8)
@@ -106,9 +109,6 @@ importers:
       '@types/node':
         specifier: 24.1.0
         version: 24.1.0
-      '@typescript-eslint/utils':
-        specifier: 8.38.0
-        version: 8.38.0(eslint@9.31.0(jiti@2.5.1))(typescript@5.8.3)
       '@virtual-live-lab/eslint-config':
         specifier: catalog:eslint
         version: 2.2.24(@typescript-eslint/parser@8.38.0(eslint@9.31.0(jiti@2.5.1))(typescript@5.8.3))(eslint@9.31.0(jiti@2.5.1))(tailwindcss@3.4.17)(typescript@5.8.3)

@@ -42,7 +42,6 @@
     "@arethetypeswrong/cli": "catalog:build",
     "@biomejs/biome": "catalog:biome",
     "@types/node": "24.1.0",
-    "@typescript-eslint/utils": "8.38.0",
     "@virtual-live-lab/eslint-config": "catalog:eslint",
     "@virtual-live-lab/tsconfig": "catalog:typescript",
     "eslint": "catalog:eslint",
@@ -55,6 +54,7 @@
     "vitest": "catalog:test"
   },
   "dependencies": {
+    "@typescript-eslint/utils": "^8.0.0",
     "bundle-require": "^5.1.0",
     "empathic": "^2.0.0",
     "mlly": "^1.7.4",
