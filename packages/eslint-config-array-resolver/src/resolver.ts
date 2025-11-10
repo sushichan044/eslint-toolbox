@@ -22,10 +22,10 @@
 import type { RuleMetaData } from "@typescript-eslint/utils/ts-eslint";
 import type { Linter, Rule } from "eslint";
 
-import { bundleRequire } from "bundle-require";
 import { any as findUpAny } from "empathic/find";
 import { resolve as resolveModule } from "mlly";
 import { dirname } from "pathe";
+import { unrun } from "unrun";
 
 import {
   executeWithSilentLogs,
@@ -80,25 +80,18 @@ export const resolveFlatConfig = async (
   const { suppressOutput = false } = options;
   const { basePath, fullPath } = findConfigPath(root);
 
-  const moduleImportPromise = runInDirectory(basePath, async () => {
-    return bundleRequire({
-      cwd: basePath,
-      filepath: fullPath,
-      tsconfig: false,
-    });
-  });
+  const moduleImportPromise = runInDirectory(basePath, async () =>
+    unrun<FlatConfigItem | FlatConfigItem[]>({
+      debug: true,
+      path: fullPath,
+    }),
+  );
 
   const importPromise = suppressOutput
     ? executeWithSilentLogs(async () => moduleImportPromise)
     : moduleImportPromise;
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { dependencies, mod } = await importPromise;
-
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  const configModule = (await (mod.default ?? mod)) as
-    | FlatConfigItem
-    | FlatConfigItem[];
+  const { dependencies, module: configModule } = await importPromise;
 
   const rawConfigs = Array.isArray(configModule)
     ? configModule
