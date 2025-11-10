@@ -58,6 +58,7 @@
     "bundle-require": "^5.1.0",
     "empathic": "^2.0.0",
     "mlly": "^1.7.4",
-    "pathe": "^2.0.3"
+    "pathe": "^2.0.3",
+    "unrun": "0.2.6"
   }
 }
