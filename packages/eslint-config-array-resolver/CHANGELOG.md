@@ -1,5 +1,16 @@
 # @sushichan044/eslint-config-array-resolver
 
+## 0.1.3
+### Patch Changes
+
+
+
+- [#26](https://github.com/sushichan044/eslint-toolbox/pull/26) [`8cbd59f`](https://github.com/sushichan044/eslint-toolbox/commit/8cbd59fce9a1ff0e3b1f234814ad64fe38bfdfb1) Thanks [@sushichan044](https://github.com/sushichan044)! - perf: replace bundle-require with unrun
+
+
+
+- [#28](https://github.com/sushichan044/eslint-toolbox/pull/28) [`7621444`](https://github.com/sushichan044/eslint-toolbox/commit/76214443f29c615e608f74e628e1c6869e3e6faa) Thanks [@sushichan044](https://github.com/sushichan044)! - chore(deps): bump all devDependencies
+
 ## 0.1.2
 ### Patch Changes
 
