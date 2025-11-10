@@ -81,17 +81,17 @@ export const resolveFlatConfig = async (
   const { suppressOutput = false } = options;
   const { basePath, fullPath } = findConfigPath(root);
 
-  const moduleImportPromise = runInDirectory(basePath, async () =>
-    unrun<FlatConfigItem | FlatConfigItem[]>({
-      path: fullPath,
-    }),
-  );
+  // Defer import execution by wrapping in a function
+  const startImportConfig = async () =>
+    runInDirectory(basePath, async () =>
+      unrun<FlatConfigItem | FlatConfigItem[]>({
+        path: fullPath,
+      }),
+    );
 
-  const importPromise = suppressOutput
-    ? executeWithSilentLogs(async () => moduleImportPromise)
-    : moduleImportPromise;
-
-  const { dependencies, module: configModule } = await importPromise;
+  const { dependencies, module: configModule } = await (suppressOutput
+    ? executeWithSilentLogs(startImportConfig)
+    : startImportConfig());
 
   const rawConfigs = Array.isArray(configModule)
     ? configModule
