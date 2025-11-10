@@ -4,7 +4,7 @@
  * This module is for resolving the ESLint config with rule metadata.
  *
  * This file includes code modified from the ESLint Config Inspector project
- * (https://github.com/eslint/config-inspector/blob/8a65a0b00a5f32b4e28699d66b1c125fbeb7fa24/src/configs.ts)
+ * (https://github.com/eslint/config-inspector/blob/53cbf7713bbefe285a917d07917821ca378a581d/src/configs.ts)
  * Original code copyright: Copyright (c) ESLint contributors
  * Licensed under the Apache License, Version 2.0
  *
@@ -15,17 +15,18 @@
  * - explicitly move to the directory of the eslint config file
  * - use empathic instead of find-up to find the config file
  * - suppress unnecessary output when importing the config module
+ * - replace `bundle-require` with `unrun`
  *
- * For full license and copyright information, see the LICENSE and NOTICE files.
+ * For full license and copyright information, see the LICENSE files.
  */
 
 import type { RuleMetaData } from "@typescript-eslint/utils/ts-eslint";
 import type { Linter, Rule } from "eslint";
 
-import { bundleRequire } from "bundle-require";
 import { any as findUpAny } from "empathic/find";
 import { resolve as resolveModule } from "mlly";
-import { dirname } from "pathe";
+import { dirname, normalize } from "pathe";
+import { unrun } from "unrun";
 
 import {
   executeWithSilentLogs,
@@ -64,8 +65,8 @@ export const findConfigPath = (
   }
 
   return {
-    basePath: dirname(configPath),
-    fullPath: configPath,
+    basePath: normalize(dirname(configPath)),
+    fullPath: normalize(configPath),
   };
 };
 
@@ -80,25 +81,17 @@ export const resolveFlatConfig = async (
   const { suppressOutput = false } = options;
   const { basePath, fullPath } = findConfigPath(root);
 
-  const moduleImportPromise = runInDirectory(basePath, async () => {
-    return bundleRequire({
-      cwd: basePath,
-      filepath: fullPath,
-      tsconfig: false,
-    });
-  });
+  const moduleImportPromise = runInDirectory(basePath, async () =>
+    unrun<FlatConfigItem | FlatConfigItem[]>({
+      path: fullPath,
+    }),
+  );
 
   const importPromise = suppressOutput
     ? executeWithSilentLogs(async () => moduleImportPromise)
     : moduleImportPromise;
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { dependencies, mod } = await importPromise;
-
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  const configModule = (await (mod.default ?? mod)) as
-    | FlatConfigItem
-    | FlatConfigItem[];
+  const { dependencies, module: configModule } = await importPromise;
 
   const rawConfigs = Array.isArray(configModule)
     ? configModule
@@ -108,6 +101,7 @@ export const resolveFlatConfig = async (
   // https://github.com/eslint/eslint/blob/21d3766c3f4efd981d3cc294c2c82c8014815e6e/lib/config/default-config.js#L66-L69
   rawConfigs.unshift(
     {
+      index: 1,
       languageOptions: {
         ecmaVersion: "latest",
         parserOptions: {},
@@ -120,14 +114,17 @@ export const resolveFlatConfig = async (
     } as FlatConfigItem,
     {
       ignores: ["**/node_modules/", ".git/"],
+      index: 2,
       name: "eslint/defaults/ignores",
     } as FlatConfigItem,
     {
       files: ["**/*.js", "**/*.mjs"],
+      index: 3,
       name: "eslint/defaults/files",
     } as FlatConfigItem,
     {
       files: ["**/*.cjs"],
+      index: 4,
       languageOptions: {
         ecmaVersion: "latest",
         sourceType: "commonjs",
