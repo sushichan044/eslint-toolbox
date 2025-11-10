@@ -1,7 +1,7 @@
 {
   "name": "eslint-rule-explorer",
   "description": "A powerful CLI tool for exploring and analyzing ESLint rules in your projects.",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
   "license": "Apache-2.0",
   "author": {
