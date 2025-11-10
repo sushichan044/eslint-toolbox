@@ -25,7 +25,7 @@ import type { Linter, Rule } from "eslint";
 
 import { any as findUpAny } from "empathic/find";
 import { resolve as resolveModule } from "mlly";
-import { dirname } from "pathe";
+import { dirname, normalize } from "pathe";
 import { unrun } from "unrun";
 
 import {
@@ -65,8 +65,8 @@ export const findConfigPath = (
   }
 
   return {
-    basePath: dirname(configPath),
-    fullPath: configPath,
+    basePath: normalize(dirname(configPath)),
+    fullPath: normalize(configPath),
   };
 };
 
@@ -83,7 +83,6 @@ export const resolveFlatConfig = async (
 
   const moduleImportPromise = runInDirectory(basePath, async () =>
     unrun<FlatConfigItem | FlatConfigItem[]>({
-      debug: true,
       path: fullPath,
     }),
   );
