@@ -16,7 +16,7 @@
  * - use empathic instead of find-up to find the config file
  * - suppress unnecessary output when importing the config module
  *
- * For full license and copyright information, see the LICENSE and NOTICE files.
+ * For full license and copyright information, see the LICENSE files.
  */
 
 import type { RuleMetaData } from "@typescript-eslint/utils/ts-eslint";
@@ -101,6 +101,7 @@ export const resolveFlatConfig = async (
   // https://github.com/eslint/eslint/blob/21d3766c3f4efd981d3cc294c2c82c8014815e6e/lib/config/default-config.js#L66-L69
   rawConfigs.unshift(
     {
+      index: 1,
       languageOptions: {
         ecmaVersion: "latest",
         parserOptions: {},
@@ -113,14 +114,17 @@ export const resolveFlatConfig = async (
     } as FlatConfigItem,
     {
       ignores: ["**/node_modules/", ".git/"],
+      index: 2,
       name: "eslint/defaults/ignores",
     } as FlatConfigItem,
     {
       files: ["**/*.js", "**/*.mjs"],
+      index: 3,
       name: "eslint/defaults/files",
     } as FlatConfigItem,
     {
       files: ["**/*.cjs"],
+      index: 4,
       languageOptions: {
         ecmaVersion: "latest",
         sourceType: "commonjs",
