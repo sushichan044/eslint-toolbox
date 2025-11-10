@@ -81,7 +81,7 @@ export const resolveFlatConfig = async (
   const { suppressOutput = false } = options;
   const { basePath, fullPath } = findConfigPath(root);
 
-  // just create Promise, do not run yet
+  // Defer import execution by wrapping in a function
   const startImportConfig = async () =>
     runInDirectory(basePath, async () =>
       unrun<FlatConfigItem | FlatConfigItem[]>({
