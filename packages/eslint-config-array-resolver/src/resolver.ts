@@ -4,7 +4,7 @@
  * This module is for resolving the ESLint config with rule metadata.
  *
  * This file includes code modified from the ESLint Config Inspector project
- * (https://github.com/eslint/config-inspector/blob/8a65a0b00a5f32b4e28699d66b1c125fbeb7fa24/src/configs.ts)
+ * (https://github.com/eslint/config-inspector/blob/53cbf7713bbefe285a917d07917821ca378a581d/src/configs.ts)
  * Original code copyright: Copyright (c) ESLint contributors
  * Licensed under the Apache License, Version 2.0
  *
@@ -15,6 +15,7 @@
  * - explicitly move to the directory of the eslint config file
  * - use empathic instead of find-up to find the config file
  * - suppress unnecessary output when importing the config module
+ * - replace `bundle-require` with `unrun`
  *
  * For full license and copyright information, see the LICENSE files.
  */
