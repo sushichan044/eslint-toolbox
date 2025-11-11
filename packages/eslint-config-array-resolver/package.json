@@ -18,16 +18,13 @@
     "registry": "https://registry.npmjs.org/",
     "provenance": true
   },
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     }
   },
   "scripts": {
@@ -35,29 +32,28 @@
     "format": "biome format --write .",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
-    "build": "tsdown",
-    "build:check": "pnpm run build && pnpm pack && attw"
+    "build": "tsdown"
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "catalog:build",
-    "@biomejs/biome": "catalog:biome",
-    "@types/node": "24.1.0",
-    "@virtual-live-lab/eslint-config": "catalog:eslint",
-    "@virtual-live-lab/tsconfig": "catalog:typescript",
-    "eslint": "catalog:eslint",
-    "fs-fixture": "catalog:test",
-    "publint": "catalog:build",
-    "tsdown": "catalog:build",
-    "typescript": "catalog:typescript",
-    "typescript-eslint": "catalog:eslint",
-    "unplugin-unused": "catalog:build",
-    "vitest": "catalog:test"
+    "@arethetypeswrong/core": "catalog:dev",
+    "@biomejs/biome": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "@virtual-live-lab/eslint-config": "catalog:dev",
+    "@virtual-live-lab/tsconfig": "catalog:dev",
+    "eslint": "catalog:dev",
+    "fs-fixture": "catalog:dev",
+    "publint": "catalog:dev",
+    "tsdown": "catalog:dev",
+    "typescript": "catalog:dev",
+    "typescript-eslint": "catalog:prod",
+    "unplugin-unused": "catalog:dev",
+    "vitest": "catalog:dev"
   },
   "dependencies": {
-    "@typescript-eslint/utils": "^8.0.0",
-    "empathic": "^2.0.0",
-    "mlly": "^1.7.4",
-    "pathe": "^2.0.3",
-    "unrun": "^0.2.6"
+    "@typescript-eslint/utils": "catalog:prod",
+    "empathic": "catalog:prod",
+    "mlly": "catalog:prod",
+    "pathe": "catalog:prod",
+    "unrun": "catalog:prod"
   }
 }

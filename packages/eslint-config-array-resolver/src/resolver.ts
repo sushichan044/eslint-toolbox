@@ -179,11 +179,11 @@ export const resolveFlatConfig = async (
     return {
       ...c,
       index: index,
-      // @ts-expect-error We cannot adjust it.
       languageOptions: c.languageOptions
         ? {
             ...c.languageOptions,
-            parser: c.languageOptions.parser?.meta?.name,
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
+            parser: (c.languageOptions as any).parser?.meta?.name,
           }
         : undefined,
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
