@@ -1,7 +1,7 @@
 {
   "name": "@sushichan044/eslint-config-array-resolver",
   "description": "Resolves flat config module. For internal use only.",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "type": "module",
   "license": "Apache-2.0",
   "author": {
