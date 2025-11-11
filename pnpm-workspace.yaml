@@ -32,3 +32,5 @@ catalogs:
 
 onlyBuiltDependencies:
   - esbuild
+
+trustPolicy: no-downgrade
