@@ -1,9 +1,11 @@
 import { defineConfig } from "tsdown";
 
 export default defineConfig({
+  attw: { level: "error", profile: "esmOnly" },
   clean: true,
   dts: true,
   entry: ["src/index.ts", "src/cli.ts"],
+  fixedExtension: true,
   format: "esm",
   minify: "dce-only",
   nodeProtocol: true,
