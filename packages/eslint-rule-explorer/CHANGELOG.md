@@ -1,5 +1,15 @@
 # eslint-rule-explorer
 
+## 0.1.4
+### Patch Changes
+
+
+
+- [#31](https://github.com/sushichan044/eslint-toolbox/pull/31) [`b23a4eb`](https://github.com/sushichan044/eslint-toolbox/commit/b23a4ebf666f7adc9819b61d380c5661c92698ed) Thanks [@sushichan044](https://github.com/sushichan044)! - chore(deps): bump all dependencies
+
+- Updated dependencies [[`b23a4eb`](https://github.com/sushichan044/eslint-toolbox/commit/b23a4ebf666f7adc9819b61d380c5661c92698ed), [`99955ad`](https://github.com/sushichan044/eslint-toolbox/commit/99955ad113d0ffa7d926db8384d96c7761dde589)]:
+  - @sushichan044/eslint-config-array-resolver@0.1.4
+
 ## 0.1.3
 ### Patch Changes
 
