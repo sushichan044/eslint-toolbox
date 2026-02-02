@@ -48,7 +48,7 @@ pnpm build
 # Build and validate package structure
 pnpm build:check
 
-# Format code with Biome
+# Format code
 pnpm format
 ```
 

@@ -1,12 +1,15 @@
 {
   "name": "eslint-toolbox",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "description": "",
+  "keywords": [],
+  "author": "",
+  "type": "module",
   "scripts": {
     "lint": "pnpm -r run lint",
     "test": "vitest --run",
-    "format": "biome format --write .",
+    "format": "oxfmt",
     "typecheck": "pnpm -r run typecheck",
     "build": "pnpm run build:config-array-resolver && pnpm run build:rule-explorer",
     "build:config-array-resolver": "pnpm --filter @sushichan044/eslint-config-array-resolver run build",
@@ -15,20 +18,17 @@
     "release": "pnpm run build && changeset publish",
     "changeset": "changeset"
   },
-  "keywords": [],
-  "author": "",
-  "packageManager": "pnpm@10.21.0",
-  "type": "module",
   "devDependencies": {
-    "@biomejs/biome": "catalog:dev",
     "@changesets/changelog-github": "catalog:dev",
     "@changesets/cli": "catalog:dev",
     "@virtual-live-lab/eslint-config": "catalog:dev",
     "@virtual-live-lab/tsconfig": "catalog:dev",
     "eslint": "catalog:dev",
+    "oxfmt": "catalog:dev",
     "pkg-pr-new": "catalog:dev",
     "typescript": "catalog:dev",
     "typescript-eslint": "catalog:prod",
     "vitest": "catalog:dev"
-  }
+  },
+  "packageManager": "pnpm@10.21.0"
 }

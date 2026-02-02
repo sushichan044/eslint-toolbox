@@ -1,8 +1,7 @@
 {
   "name": "@sushichan044/eslint-config-array-resolver",
-  "description": "Resolves flat config module. For internal use only.",
   "version": "0.2.0",
-  "type": "module",
+  "description": "Resolves flat config module. For internal use only.",
   "license": "Apache-2.0",
   "author": {
     "name": "sushichan044",
@@ -13,44 +12,27 @@
     "url": "git+https://github.com/sushichan044/eslint-toolbox.git",
     "directory": "packages/eslint-config-array-resolver"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/",
-    "provenance": true
-  },
   "files": [
     "dist"
   ],
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs"
     }
   },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true,
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "lint": "eslint --max-warnings 0 --fix .",
-    "format": "biome format --write .",
+    "format": "oxfmt",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
     "build": "tsdown"
-  },
-  "peerDependencies": {
-    "eslint": "^9.0.0"
-  },
-  "devDependencies": {
-    "@arethetypeswrong/core": "catalog:dev",
-    "@biomejs/biome": "catalog:dev",
-    "@types/node": "catalog:dev",
-    "@virtual-live-lab/eslint-config": "catalog:dev",
-    "@virtual-live-lab/tsconfig": "catalog:dev",
-    "eslint": "catalog:dev",
-    "fs-fixture": "catalog:dev",
-    "publint": "catalog:dev",
-    "tsdown": "catalog:dev",
-    "typescript": "catalog:dev",
-    "typescript-eslint": "catalog:prod",
-    "unplugin-unused": "catalog:dev",
-    "vitest": "catalog:dev"
   },
   "dependencies": {
     "@typescript-eslint/utils": "catalog:prod",
@@ -58,5 +40,23 @@
     "mlly": "catalog:prod",
     "pathe": "catalog:prod",
     "unrun": "catalog:prod"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/core": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "@virtual-live-lab/eslint-config": "catalog:dev",
+    "@virtual-live-lab/tsconfig": "catalog:dev",
+    "eslint": "catalog:dev",
+    "fs-fixture": "catalog:dev",
+    "oxfmt": "catalog:dev",
+    "publint": "catalog:dev",
+    "tsdown": "catalog:dev",
+    "typescript": "catalog:dev",
+    "typescript-eslint": "catalog:prod",
+    "unplugin-unused": "catalog:dev",
+    "vitest": "catalog:dev"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0"
   }
 }

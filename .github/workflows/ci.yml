@@ -38,11 +38,11 @@ jobs:
       - name: Run ESLint
         run: pnpm run lint
 
-      - name: Run Biome
+      - name: Run formatter
         run: |
           pnpm run format
           if ! git diff --exit-code; then
-            echo "Biome format failed. Please run 'pnpm run format' to fix the issues."
+            echo "format failed. Please run 'pnpm run format' to fix the issues."
             exit 1
           fi
 

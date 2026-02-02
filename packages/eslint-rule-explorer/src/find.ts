@@ -1,10 +1,6 @@
 import type { ESLintConfig } from "@sushichan044/eslint-config-array-resolver";
 
-import type {
-  RuleIdentifierInput,
-  RuleMetaData,
-  SearchStrategy,
-} from "./types";
+import type { RuleIdentifierInput, RuleMetaData, SearchStrategy } from "./types";
 
 import { extractRules } from "./utils";
 
@@ -41,10 +37,7 @@ interface RuleFindResult {
   }>;
 }
 
-export const findRule = (
-  params: RuleFindParams,
-  options: RuleFindOptions,
-): RuleFindResult => {
+export const findRule = (params: RuleFindParams, options: RuleFindOptions): RuleFindResult => {
   const prepared = filterByPlugin(params);
   if (!prepared) {
     return { rules: [] };
@@ -58,9 +51,7 @@ export const findRule = (
       case "includes":
         return findFuzzyRules(prepared);
       default:
-        throw new Error(
-          `Unknown search strategy: ${String(strategy satisfies never)}`,
-        );
+        throw new Error(`Unknown search strategy: ${String(strategy satisfies never)}`);
     }
   })();
 
@@ -74,9 +65,7 @@ interface PluginFilteredResult {
   ruleIdentifier: RuleIdentifierInput;
 }
 
-const filterByPlugin = (
-  params: RuleFindParams,
-): PluginFilteredResult | null => {
+const filterByPlugin = (params: RuleFindParams): PluginFilteredResult | null => {
   const ruleIdentifier = extractRuleIdentifier(params.ruleName);
   const rules = extractRules(params.config);
 
@@ -91,9 +80,7 @@ const filterByPlugin = (
   };
 };
 
-const findExactRule = (
-  prepared: PluginFilteredResult,
-): RuleFindResult["rules"] => {
+const findExactRule = (prepared: PluginFilteredResult): RuleFindResult["rules"] => {
   const { candidatePluginRules, ruleIdentifier } = prepared;
 
   const exactRule = candidatePluginRules[ruleIdentifier.name];
@@ -109,15 +96,11 @@ const findExactRule = (
   ];
 };
 
-const findFuzzyRules = (
-  prepared: PluginFilteredResult,
-): RuleFindResult["rules"] => {
+const findFuzzyRules = (prepared: PluginFilteredResult): RuleFindResult["rules"] => {
   const { candidatePluginRules, ruleIdentifier } = prepared;
 
   return Object.entries(candidatePluginRules)
-    .filter(([ruleKey]) =>
-      ruleKey.toLowerCase().includes(ruleIdentifier.name.toLowerCase()),
-    )
+    .filter(([ruleKey]) => ruleKey.toLowerCase().includes(ruleIdentifier.name.toLowerCase()))
     .map(([ruleKey, ruleValue]) => ({
       info: ruleValue,
       name: `${ruleIdentifier.plugin}/${ruleKey}`,

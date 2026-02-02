@@ -149,8 +149,7 @@ describe("findConfigPath", () => {
     },
     {
       cwd: "multiple-parent-configs/level1/level2/level3",
-      expectedPathContains:
-        "multiple-parent-configs/level1/level2/eslint.config.mjs",
+      expectedPathContains: "multiple-parent-configs/level1/level2/eslint.config.mjs",
       name: "nearest config priority",
       shouldThrow: false,
     },
@@ -160,9 +159,7 @@ describe("findConfigPath", () => {
     const cwdPath = fixture.getPath(cwd);
 
     if (testCase.shouldThrow) {
-      expect(() => findConfigPath(cwdPath)).toThrow(
-        new Error("No eslint config found"),
-      );
+      expect(() => findConfigPath(cwdPath)).toThrow(new Error("No eslint config found"));
     } else {
       const result = findConfigPath(cwdPath);
 
@@ -172,9 +169,7 @@ describe("findConfigPath", () => {
       if (isNonEmptyString(testCase.expectedPathContains)) {
         expect(result.fullPath).toContain(testCase.expectedPathContains);
       } else {
-        throw new Error(
-          "expectedPathContains is required when shouldThrow is false",
-        );
+        throw new Error("expectedPathContains is required when shouldThrow is false");
       }
     }
   });

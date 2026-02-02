@@ -23,8 +23,7 @@ const mainCmd = define({
       type: "boolean",
     },
     root: {
-      description:
-        "Root directory of the project (default: current working directory)",
+      description: "Root directory of the project (default: current working directory)",
       type: "string",
     },
     rule: {
@@ -35,12 +34,7 @@ const mainCmd = define({
   } as const satisfies Args,
   name: "root",
   run: async (c) => {
-    const {
-      exact: searchExact,
-      json: printAsJSON,
-      root: rootDir,
-      rule: ruleName,
-    } = c.values;
+    const { exact: searchExact, json: printAsJSON, root: rootDir, rule: ruleName } = c.values;
 
     const searchResult = await searchESLintRule(ruleName, {
       strategy: searchExact ? "exact" : "includes",

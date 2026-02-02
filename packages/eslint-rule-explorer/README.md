@@ -77,28 +77,28 @@ npm install eslint-rule-explorer
 ```
 
 ```javascript
-import { searchESLintRule } from 'eslint-rule-explorer';
+import { searchESLintRule } from "eslint-rule-explorer";
 
 // Search for rules with fuzzy matching using `String.includes`
-const results = await searchESLintRule('no-unused');
-const results = await searchESLintRule('no-unused', {
-  strategy: 'includes'
+const results = await searchESLintRule("no-unused");
+const results = await searchESLintRule("no-unused", {
+  strategy: "includes",
 });
 
 // Exact search
-const exactResults = await searchESLintRule('no-unused-vars', {
-  strategy: 'exact'
+const exactResults = await searchESLintRule("no-unused-vars", {
+  strategy: "exact",
 });
 
 // Custom project root
-const customResults = await searchESLintRule('typescript', {
-  rootDir: '/path/to/your/project'
+const customResults = await searchESLintRule("typescript", {
+  rootDir: "/path/to/your/project",
 });
 
 // Suppress console output from side effect of resolving ESLint config
 // (useful for JSON pipelines)
-const quietResults = await searchESLintRule('react', {
-  suppressOutput: true
+const quietResults = await searchESLintRule("react", {
+  suppressOutput: true,
 });
 ```
 
@@ -110,21 +110,17 @@ For detailed API documentation including all available options and return types,
 
 ```javascript
 // Find all TypeScript ESLint rules
-const tsRules = await searchESLintRule('@typescript-eslint', {
-  suppressOutput: true
+const tsRules = await searchESLintRule("@typescript-eslint", {
+  suppressOutput: true,
 });
 
 // Extract documentation URLs
-const urls = tsRules
-  .filter(rule => rule.info.docs?.url)
-  .map(rule => rule.info.docs.url);
+const urls = tsRules.filter((rule) => rule.info.docs?.url).map((rule) => rule.info.docs.url);
 
 // Find fixable rules only
-const fixableRules = await searchESLintRule('', {
-  strategy: 'includes'
-}).then(rules =>
-  rules.filter(rule => rule.info.fixable)
-);
+const fixableRules = await searchESLintRule("", {
+  strategy: "includes",
+}).then((rules) => rules.filter((rule) => rule.info.fixable));
 ```
 
 ## CLI Output Format

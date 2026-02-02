@@ -25,9 +25,7 @@ export const runInDirectory = async <T>(
 /**
  * Check if the ruleId is a non-empty string.
  */
-export const isNonEmptyString = (
-  maybeString?: unknown,
-): maybeString is string => {
+export const isNonEmptyString = (maybeString?: unknown): maybeString is string => {
   return typeof maybeString === "string" && maybeString !== "";
 };
 
@@ -44,9 +42,7 @@ const NO_RESULT = Symbol("NO_RESULT");
  * @param function_
  * @returns
  */
-export const executeWithSilentLogs = async <T>(
-  function_: () => Awaitable<T>,
-): Promise<T> => {
+export const executeWithSilentLogs = async <T>(function_: () => Awaitable<T>): Promise<T> => {
   const original = {
     debug: console.debug,
     info: console.info,
