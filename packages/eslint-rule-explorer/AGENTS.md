@@ -15,9 +15,11 @@ const mainCmd = define({
     exact: { type: "boolean", default: false },
     json: { type: "boolean", default: false },
     root: { type: "string" },
-    rule: { type: "positional" }
+    rule: { type: "positional" },
   },
-  run: async (c) => { /* implementation */ }
+  run: async (c) => {
+    /* implementation */
+  },
 });
 ```
 
@@ -90,10 +92,7 @@ Both are normalized into `FlattenRules` structure:
 The CLI automatically generates `plugin-rules.json` in the current directory:
 
 ```typescript
-await writeFile(
-  "plugin-rules.json",
-  JSON.stringify(aggregateRules(eslintConfig), null, 2),
-);
+await writeFile("plugin-rules.json", JSON.stringify(aggregateRules(eslintConfig), null, 2));
 ```
 
 This file contains the complete flattened rule registry and is invaluable for:

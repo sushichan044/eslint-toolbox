@@ -28,11 +28,7 @@ import { resolve as resolveModule } from "mlly";
 import { dirname, normalize } from "pathe";
 import { unrun } from "unrun";
 
-import {
-  executeWithSilentLogs,
-  isNonEmptyString,
-  runInDirectory,
-} from "./utils.js";
+import { executeWithSilentLogs, isNonEmptyString, runInDirectory } from "./utils.js";
 
 export interface ESLintConfig {
   configs: FlatConfigItem[];
@@ -45,9 +41,7 @@ export interface ESLintConfig {
  *
  * @internal
  */
-export const findConfigPath = (
-  root: string,
-): { basePath: string; fullPath: string } => {
+export const findConfigPath = (root: string): { basePath: string; fullPath: string } => {
   const configPath = findUpAny(
     [
       "eslint.config.js",
@@ -93,9 +87,7 @@ export const resolveFlatConfig = async (
     ? executeWithSilentLogs(startImportConfig)
     : startImportConfig());
 
-  const rawConfigs = Array.isArray(configModule)
-    ? configModule
-    : [configModule];
+  const rawConfigs = Array.isArray(configModule) ? configModule : [configModule];
 
   // ESLint applies these default configs to all files
   // https://github.com/eslint/eslint/blob/21d3766c3f4efd981d3cc294c2c82c8014815e6e/lib/config/default-config.js#L66-L69

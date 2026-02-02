@@ -1,8 +1,7 @@
 {
   "name": "eslint-rule-explorer",
-  "description": "A powerful CLI tool for exploring and analyzing ESLint rules in your projects.",
   "version": "0.2.0",
-  "type": "module",
+  "description": "A powerful CLI tool for exploring and analyzing ESLint rules in your projects.",
   "license": "Apache-2.0",
   "author": {
     "name": "sushichan044",
@@ -13,34 +12,32 @@
     "url": "git+https://github.com/sushichan044/eslint-toolbox.git",
     "directory": "packages/eslint-rule-explorer"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/",
-    "provenance": true
-  },
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.mts",
   "bin": {
     "eslint-rule-explorer": "bin/eslint-rule-explorer.mjs"
   },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.mts",
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs"
     }
   },
-  "files": [
-    "dist"
-  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true,
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "lint": "eslint --max-warnings 0 --fix .",
-    "format": "biome format --write .",
+    "format": "oxfmt",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
     "build": "tsdown"
-  },
-  "peerDependencies": {
-    "eslint": "^9.0.0"
   },
   "dependencies": {
     "@sushichan044/eslint-config-array-resolver": "workspace:^",
@@ -48,7 +45,6 @@
   },
   "devDependencies": {
     "@arethetypeswrong/core": "catalog:dev",
-    "@biomejs/biome": "catalog:dev",
     "@types/node": "catalog:dev",
     "@typescript-eslint/utils": "catalog:prod",
     "@virtual-live-lab/eslint-config": "catalog:dev",
@@ -57,11 +53,15 @@
     "eslint-plugin-react": "catalog:dev",
     "fs-fixture": "catalog:dev",
     "globals": "catalog:dev",
+    "oxfmt": "catalog:dev",
     "publint": "catalog:dev",
     "tsdown": "catalog:dev",
     "typescript": "catalog:dev",
     "typescript-eslint": "catalog:prod",
     "unplugin-unused": "catalog:dev",
     "vitest": "catalog:dev"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0"
   }
 }

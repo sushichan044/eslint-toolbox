@@ -72,9 +72,7 @@ const formatConfigurationSection = (ruleInfo: RuleMetaData): string[] => {
 
     // Schema information
     if (Array.isArray(ruleInfo.schema)) {
-      lines.push(
-        formatBulletPoint(`Options: ${ruleInfo.schema.length} parameter(s)`),
-      );
+      lines.push(formatBulletPoint(`Options: ${ruleInfo.schema.length} parameter(s)`));
     } else if (typeof ruleInfo.schema === "object") {
       lines.push(formatBulletPoint("Options: configurable"));
     }
@@ -87,12 +85,7 @@ const formatDocumentationSection = (ruleInfo: RuleMetaData): string[] => {
   const lines: string[] = [];
   const docs = ruleInfo.docs as Record<string, unknown> | null | undefined;
 
-  if (
-    docs &&
-    typeof docs === "object" &&
-    "url" in docs &&
-    typeof docs["url"] === "string"
-  ) {
+  if (docs && typeof docs === "object" && "url" in docs && typeof docs["url"] === "string") {
     lines.push(formatSectionHeader("📖 DOCUMENTATION"));
     lines.push(formatBulletPoint(`URL: ${docs["url"]}`));
   }
@@ -114,15 +107,9 @@ export const formatRuleInfo = (ruleInfo: RuleMetaData): string => {
   // Deprecation warning
   if (ruleInfo.deprecated !== undefined && ruleInfo.deprecated !== false) {
     let deprecatedLine = "📋 DEPRECATED";
-    if (
-      typeof ruleInfo.deprecated === "object" &&
-      ruleInfo.deprecated !== null
-    ) {
+    if (typeof ruleInfo.deprecated === "object" && ruleInfo.deprecated !== null) {
       const deprecatedInfo = ruleInfo.deprecated as Record<string, unknown>;
-      if (
-        "reason" in deprecatedInfo &&
-        typeof deprecatedInfo["reason"] === "string"
-      ) {
+      if ("reason" in deprecatedInfo && typeof deprecatedInfo["reason"] === "string") {
         deprecatedLine += `: ${deprecatedInfo["reason"]}`;
       }
     }

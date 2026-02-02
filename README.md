@@ -20,10 +20,10 @@ eslint-toolbox/
 
 ### Packages
 
-| Package | Description |
-|---------|-------------|
-| **[eslint-rule-explorer](./packages/eslint-rule-explorer)** | CLI tool for retrieving and displaying detailed ESLint configuration information |
-| **[@sushichan044/eslint-config-array-resolver](./packages/eslint-config-array-resolver)** | Internal library for resolving ESLint flat configuration modules |
+| Package                                                                                   | Description                                                                      |
+| ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **[eslint-rule-explorer](./packages/eslint-rule-explorer)**                               | CLI tool for retrieving and displaying detailed ESLint configuration information |
+| **[@sushichan044/eslint-config-array-resolver](./packages/eslint-config-array-resolver)** | Internal library for resolving ESLint flat configuration modules                 |
 
 ## Development Setup
 
@@ -39,7 +39,7 @@ pnpm build
 # Run tests across all packages
 pnpm test
 
-# Format code with Biome
+# Format code
 pnpm format
 
 # Lint code with ESLint

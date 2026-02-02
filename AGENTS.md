@@ -11,7 +11,7 @@ eslint-toolbox is a toolkit designed to solve ESLint configuration complexity. I
 - **Language**: TypeScript
 - **Package Manager**: pnpm (workspace)
 - **Build Tool**: tsdown
-- **Formatter**: Biome
+- **Formatter**: oxfmt
 - **Testing**: Vitest
 - **TypeScript Config**: @virtual-live-lab/tsconfig
 - **ESLint Config**: @virtual-live-lab/eslint-config
@@ -50,7 +50,6 @@ eslint-toolbox/
 ├── pnpm-workspace.yaml         # pnpm workspace configuration
 ├── tsconfig.json               # TypeScript shared configuration
 ├── vitest.config.ts            # Test configuration
-├── biome.json                  # Biome configuration
 └── eslint.config.js            # ESLint configuration
 ```
 
@@ -76,7 +75,6 @@ Internal library for resolving ESLint flat configuration modules
 
 ### Code Quality
 
-- Automatic formatting with Biome
 - Strict TypeScript configuration
 - Consistent ESLint rule application
 
@@ -116,4 +114,4 @@ pnpm test
 
 ---
 
-*For detailed implementation guides for each package, refer to CLAUDE.md files in each directory under packages/*
+_For detailed implementation guides for each package, refer to CLAUDE.md files in each directory under packages/_

@@ -13,10 +13,7 @@ const loadFixture = async (fixtureName: string) => {
 describe("searchRule with exact strategy", () => {
   it("should find exact ESLint builtin rule", async () => {
     const config = await loadFixture("basic-config");
-    const result = findRule(
-      { config, ruleName: "no-unused-vars" },
-      { strategy: "exact" },
-    );
+    const result = findRule({ config, ruleName: "no-unused-vars" }, { strategy: "exact" });
 
     expect(result.rules).toHaveLength(1);
     expect(result.rules[0]?.name).toBe("eslint/no-unused-vars");
@@ -42,10 +39,7 @@ describe("searchRule with exact strategy", () => {
 
   it("should return empty array for non-existent rule", async () => {
     const config = await loadFixture("basic-config");
-    const result = findRule(
-      { config, ruleName: "non-existent-rule" },
-      { strategy: "exact" },
-    );
+    const result = findRule({ config, ruleName: "non-existent-rule" }, { strategy: "exact" });
 
     expect(result).toEqual({
       rules: [],
@@ -71,10 +65,7 @@ describe("searchRule with exact strategy", () => {
     const config = await loadFixture("basic-config");
 
     expect(() => {
-      findRule(
-        { config, ruleName: "invalid/rule/name/format" },
-        { strategy: "exact" },
-      );
+      findRule({ config, ruleName: "invalid/rule/name/format" }, { strategy: "exact" });
     }).toThrow("Invalid rule name format: invalid/rule/name/format");
   });
 });
@@ -82,43 +73,28 @@ describe("searchRule with exact strategy", () => {
 describe("searchRule with fuzzy strategy", () => {
   it("should find rule by partial match", async () => {
     const config = await loadFixture("basic-config");
-    const result = findRule(
-      { config, ruleName: "unused" },
-      { strategy: "includes" },
-    );
+    const result = findRule({ config, ruleName: "unused" }, { strategy: "includes" });
 
     expect(result.rules.length).toBeGreaterThan(0);
-    expect(
-      result.rules.some((rule) => rule.name.includes("no-unused-vars")),
-    ).toBe(true);
+    expect(result.rules.some((rule) => rule.name.includes("no-unused-vars"))).toBe(true);
   });
 
   it("should perform case-insensitive search", async () => {
     const config = await loadFixture("basic-config");
-    const result = findRule(
-      { config, ruleName: "UNUSED" },
-      { strategy: "includes" },
-    );
+    const result = findRule({ config, ruleName: "UNUSED" }, { strategy: "includes" });
 
     expect(result.rules.length).toBeGreaterThan(0);
-    expect(
-      result.rules.some((rule) => rule.name.includes("no-unused-vars")),
-    ).toBe(true);
+    expect(result.rules.some((rule) => rule.name.includes("no-unused-vars"))).toBe(true);
   });
 
   it("should find multiple results in multi-plugin config", async () => {
     const config = await loadFixture("multi-plugin-config");
-    const result = findRule(
-      { config, ruleName: "unused" },
-      { strategy: "includes" },
-    );
+    const result = findRule({ config, ruleName: "unused" }, { strategy: "includes" });
 
     expect(result.rules.length).toBeGreaterThan(1);
 
     const ruleNames = result.rules.map((rule) => rule.name);
-    expect(
-      ruleNames.some((name) => name.includes("eslint/no-unused-vars")),
-    ).toBe(true);
+    expect(ruleNames.some((name) => name.includes("eslint/no-unused-vars"))).toBe(true);
   });
 
   it("should find plugin rule by fuzzy search", async () => {
@@ -132,9 +108,7 @@ describe("searchRule with fuzzy strategy", () => {
     );
 
     expect(result.rules.length).toBeGreaterThan(0);
-    expect(
-      result.rules.some((rule) => rule.name.includes("no-explicit-any")),
-    ).toBe(true);
+    expect(result.rules.some((rule) => rule.name.includes("no-explicit-any"))).toBe(true);
   });
 
   it("should return empty array when no matches found", async () => {
