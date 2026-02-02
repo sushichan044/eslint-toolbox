@@ -1,5 +1,19 @@
 # @sushichan044/eslint-config-array-resolver
 
+## 0.2.0
+### Minor Changes
+
+
+
+- [`8a1e006`](https://github.com/sushichan044/eslint-toolbox/commit/8a1e006310a6f53c98a8e7c3258618a9e47940dc) Thanks [@sushichan044](https://github.com/sushichan044)! - feat: require eslint as a peer dependency
+
+
+### Patch Changes
+
+
+
+- [`5d3f8af`](https://github.com/sushichan044/eslint-toolbox/commit/5d3f8af780502bf14cb6986c6ac927efdb415450) Thanks [@sushichan044](https://github.com/sushichan044)! - chore(deps): update unrun to 0.2.26
+
 ## 0.1.4
 ### Patch Changes
 
