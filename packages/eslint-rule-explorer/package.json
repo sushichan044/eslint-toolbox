@@ -39,6 +39,9 @@
     "test": "vitest --run",
     "build": "tsdown"
   },
+  "peerDependencies": {
+    "eslint": "^9.0.0"
+  },
   "dependencies": {
     "@sushichan044/eslint-config-array-resolver": "workspace:^",
     "gunshi": "catalog:prod"
@@ -46,7 +49,6 @@
   "devDependencies": {
     "@arethetypeswrong/core": "catalog:dev",
     "@biomejs/biome": "catalog:dev",
-    "@eslint/core": "catalog:dev",
     "@types/node": "catalog:dev",
     "@typescript-eslint/utils": "catalog:prod",
     "@virtual-live-lab/eslint-config": "catalog:dev",

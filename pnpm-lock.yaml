@@ -18,9 +18,6 @@ catalogs:
     '@changesets/cli':
       specifier: ^2.29.8
       version: 2.29.8
-    '@eslint/core':
-      specifier: ^1.1.0
-      version: 1.1.0
     '@types/node':
       specifier: ^24.10.0
       version: 24.10.0
@@ -191,9 +188,6 @@ importers:
       '@biomejs/biome':
         specifier: catalog:dev
         version: 2.3.13
-      '@eslint/core':
-        specifier: catalog:dev
-        version: 1.1.0
       '@types/node':
         specifier: catalog:dev
         version: 24.10.0
@@ -712,10 +706,6 @@ packages:
   '@eslint/core@0.17.0':
     resolution: {integrity: sha512-yL/sLrpmtDaFEiUj1osRP4TI2MDz1AddJL+jZ7KSqvBuliN4xqYY54IfdN8qD8Toa6g1iloph1fxQNkjOxrrpQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@eslint/core@1.1.0':
-    resolution: {integrity: sha512-/nr9K9wkr3P1EzFTdFdMoLuo1PmIxjmwvPozwoSodjNBdefGujXQUF93u1DDZpEaTuDvMsIQddsd35BwtrW9Xw==}
-    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
   '@eslint/eslintrc@3.3.1':
     resolution: {integrity: sha512-gtF186CXhIl1p4pJNGZw8Yc6RlshoePRvE0X91oPGb3vZ8pM3qOS9W9NGPat9LziaBV7XrJWGylNQXkGcnM3IQ==}
@@ -3664,10 +3654,6 @@ snapshots:
       '@eslint/core': 0.17.0
 
   '@eslint/core@0.17.0':
-    dependencies:
-      '@types/json-schema': 7.0.15
-
-  '@eslint/core@1.1.0':
     dependencies:
       '@types/json-schema': 7.0.15
 

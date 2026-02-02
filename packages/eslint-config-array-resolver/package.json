@@ -34,6 +34,9 @@
     "test": "vitest --run",
     "build": "tsdown"
   },
+  "peerDependencies": {
+    "eslint": "^9.0.0"
+  },
   "devDependencies": {
     "@arethetypeswrong/core": "catalog:dev",
     "@biomejs/biome": "catalog:dev",

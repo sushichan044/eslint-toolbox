@@ -1,8 +1,9 @@
-import type { RulesMeta } from "@eslint/core";
+import type { Rule } from "eslint";
 
+type RulesMeta = Rule.RuleModule["meta"];
 export type SearchStrategy = "exact" | "includes";
 
-export type RuleMetaData = RulesMeta<string, unknown[], unknown> & {
+export type RuleMetaData = RulesMeta & {
   name: string;
   plugin: string;
 };
