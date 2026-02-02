@@ -88,6 +88,7 @@ export const resolveFlatConfig = async (
       unrun<FlatConfigItem | FlatConfigItem[]>({
         debug,
         inputOptions: {
+          platform: "node",
           transform: {
             define: {
               // ESLint packages like `@nuxt/eslint-config` require modules such as `@vue/shared`,
