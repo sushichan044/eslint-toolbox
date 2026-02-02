@@ -1,5 +1,20 @@
 # @sushichan044/eslint-config-array-resolver
 
+## 0.2.1
+### Patch Changes
+
+
+
+- [#35](https://github.com/sushichan044/eslint-toolbox/pull/35) [`624dbfc`](https://github.com/sushichan044/eslint-toolbox/commit/624dbfc411c4fe3ed4d9d36c44691fee61e4bec4) Thanks [@sushichan044](https://github.com/sushichan044)! - chore: add `debug` option for `resolveFlatConfig()` to observe `unrun`
+
+
+
+- [#35](https://github.com/sushichan044/eslint-toolbox/pull/35) [`624dbfc`](https://github.com/sushichan044/eslint-toolbox/commit/624dbfc411c4fe3ed4d9d36c44691fee61e4bec4) Thanks [@sushichan044](https://github.com/sushichan044)! - fix: always simulate `NODE_ENV="production"`
+
+
+
+- [#38](https://github.com/sushichan044/eslint-toolbox/pull/38) [`dcc0d29`](https://github.com/sushichan044/eslint-toolbox/commit/dcc0d296280ca220dc3b100e597d81165e109968) Thanks [@sushichan044](https://github.com/sushichan044)! - fix: set `platform: "node"` for rolldown
+
 ## 0.2.0
 ### Minor Changes
 
