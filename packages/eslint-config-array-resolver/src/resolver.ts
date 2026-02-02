@@ -65,6 +65,13 @@ export const findConfigPath = (root: string): { basePath: string; fullPath: stri
 };
 
 interface ReadFlatConfigOptions {
+  /**
+   * @default false
+   */
+  debug?: boolean;
+  /**
+   * @default false
+   */
   suppressOutput?: boolean;
 }
 
@@ -72,13 +79,26 @@ export const resolveFlatConfig = async (
   root: string,
   options: ReadFlatConfigOptions = {},
 ): Promise<ESLintConfig> => {
-  const { suppressOutput = false } = options;
+  const { debug = false, suppressOutput = false } = options;
   const { basePath, fullPath } = findConfigPath(root);
 
   // Defer import execution by wrapping in a function
   const startImportConfig = async () =>
     runInDirectory(basePath, async () =>
       unrun<FlatConfigItem | FlatConfigItem[]>({
+        debug,
+        inputOptions: {
+          transform: {
+            define: {
+              // ESLint packages like `@nuxt/eslint-config` require modules such as `@vue/shared`,
+              // which exhibit different behaviors depending on the value of `process.env.NODE_ENV`.
+              //
+              // When such modules are loaded by unrun, they can lead to unstable behavior depending on the caller's `NODE_ENV` value.
+              // To prevent this, we force the configuration to load production-ready modules by overriding `NODE_ENV`.
+              "process.env.NODE_ENV": "'production'",
+            },
+          },
+        },
         path: fullPath,
       }),
     );
