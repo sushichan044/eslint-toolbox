@@ -79,6 +79,7 @@ export const resolveFlatConfig = async (
   const startImportConfig = async () =>
     runInDirectory(basePath, async () =>
       unrun<FlatConfigItem | FlatConfigItem[]>({
+        debug: true,
         path: fullPath,
       }),
     );
