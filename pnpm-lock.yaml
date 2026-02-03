@@ -80,6 +80,11 @@ catalogs:
       specifier: ^0.2.26
       version: 0.2.26
 
+patchedDependencies:
+  unrun:
+    hash: 57f36c7068918fe255df03dfc26fa3bdcf5e9c44ecfd9eaa86a56565550b46b0
+    path: patches/unrun.patch
+
 importers:
 
   .:
@@ -131,7 +136,7 @@ importers:
         version: 2.0.3
       unrun:
         specifier: catalog:prod
-        version: 0.2.26(synckit@0.11.11)
+        version: 0.2.26(patch_hash=57f36c7068918fe255df03dfc26fa3bdcf5e9c44ecfd9eaa86a56565550b46b0)(synckit@0.11.11)
     devDependencies:
       '@arethetypeswrong/core':
         specifier: catalog:dev
@@ -6040,7 +6045,7 @@ snapshots:
       tinyglobby: 0.2.15
       tree-kill: 1.2.2
       unconfig-core: 7.4.2
-      unrun: 0.2.26(synckit@0.11.11)
+      unrun: 0.2.26(patch_hash=57f36c7068918fe255df03dfc26fa3bdcf5e9c44ecfd9eaa86a56565550b46b0)(synckit@0.11.11)
     optionalDependencies:
       '@arethetypeswrong/core': 0.18.2
       publint: 0.3.17
@@ -6170,7 +6175,7 @@ snapshots:
       picomatch: 4.0.3
       webpack-virtual-modules: 0.6.2
 
-  unrun@0.2.26(synckit@0.11.11):
+  unrun@0.2.26(patch_hash=57f36c7068918fe255df03dfc26fa3bdcf5e9c44ecfd9eaa86a56565550b46b0)(synckit@0.11.11):
     dependencies:
       rolldown: 1.0.0-rc.1
     optionalDependencies:

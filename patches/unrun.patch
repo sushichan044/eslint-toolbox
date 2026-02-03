@@ -1,0 +1,15 @@
+diff --git a/dist/src-FpjER4tG.mjs b/dist/src-FpjER4tG.mjs
+index b29acc43e2b80ed47af566b2d1620e9cb987714f..b41516c2d8a9bb36a749546fd0028f61760a635e 100644
+--- a/dist/src-FpjER4tG.mjs
++++ b/dist/src-FpjER4tG.mjs
+@@ -806,8 +806,8 @@ function writeModule(code, options) {
+ 	try {
+ 		const randomKey = crypto.randomBytes(16).toString("hex");
+ 		const fname = `${filenameHint ? `${sanitize(filenameHint)}.` : ""}${randomKey}.mjs`;
+-		const projectNodeModules = path.join(process.cwd(), "node_modules");
+-		const outDir = path.join(projectNodeModules, ".unrun");
++		// We need to write bundled module to cwd to mark modules inside node_modules as external
++		const outDir = process.cwd();
+ 		const outFile = path.join(outDir, fname);
+ 		if (!fs.existsSync(outFile)) try {
+ 			fs.mkdirSync(outDir, { recursive: true });

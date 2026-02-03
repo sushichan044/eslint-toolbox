@@ -88,17 +88,8 @@ export const resolveFlatConfig = async (
       unrun<FlatConfigItem | FlatConfigItem[]>({
         debug,
         inputOptions: {
+          external: [/node_modules/],
           platform: "node",
-          transform: {
-            define: {
-              // ESLint packages like `@nuxt/eslint-config` require modules such as `@vue/shared`,
-              // which exhibit different behaviors depending on the value of `process.env.NODE_ENV`.
-              //
-              // When such modules are loaded by unrun, they can lead to unstable behavior depending on the caller's `NODE_ENV` value.
-              // To prevent this, we force the configuration to load production-ready modules by overriding `NODE_ENV`.
-              "process.env.NODE_ENV": "'production'",
-            },
-          },
         },
         path: fullPath,
       }),
