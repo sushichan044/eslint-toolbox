@@ -1,5 +1,12 @@
 # @sushichan044/eslint-config-array-resolver
 
+## 0.2.2
+### Patch Changes
+
+
+
+- [#40](https://github.com/sushichan044/eslint-toolbox/pull/40) [`46ca740`](https://github.com/sushichan044/eslint-toolbox/commit/46ca7409f2d346675384fcfe1332292bb7b36bff) Thanks [@sushichan044](https://github.com/sushichan044)! - fix: output temp files to cwd to avoid bundling module under `node_modules`
+
 ## 0.2.1
 ### Patch Changes
 
