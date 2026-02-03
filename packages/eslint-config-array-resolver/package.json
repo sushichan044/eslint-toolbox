@@ -14,8 +14,7 @@
   },
   "files": [
     "dist",
-    "LICENSE",
-    "NOTICE"
+    "LICENSE"
   ],
   "type": "module",
   "exports": {
