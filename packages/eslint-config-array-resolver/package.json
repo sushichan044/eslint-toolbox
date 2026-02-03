@@ -13,7 +13,8 @@
     "directory": "packages/eslint-config-array-resolver"
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE"
   ],
   "type": "module",
   "exports": {
@@ -39,6 +40,7 @@
     "empathic": "catalog:prod",
     "mlly": "catalog:prod",
     "pathe": "catalog:prod",
+    "rolldown": "1.0.0-rc.2",
     "unrun": "catalog:prod"
   },
   "devDependencies": {
@@ -50,6 +52,7 @@
     "fs-fixture": "catalog:dev",
     "oxfmt": "catalog:dev",
     "publint": "catalog:dev",
+    "rollup-plugin-license": "3.6.0",
     "tsdown": "catalog:dev",
     "typescript": "catalog:dev",
     "typescript-eslint": "catalog:prod",

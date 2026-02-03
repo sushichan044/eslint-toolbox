@@ -32,3 +32,6 @@ catalogs:
 
 onlyBuiltDependencies:
   - esbuild
+
+patchedDependencies:
+  unrun: patches/unrun.patch
